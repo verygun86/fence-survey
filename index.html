@@ -14,20 +14,24 @@
     --accent: #00d4aa;
     --accent2: #3b82f6;
     --danger: #ef4444;
-    --warn: #f59e0b;
     --text: #e2e8f0;
     --text2: #94a3b8;
     --radius: 12px;
+    --panel-height: 260px;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body {
     font-family: 'Noto Sans KR', sans-serif;
     background: var(--bg);
     color: var(--text);
-    height: 100dvh;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  #app {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    height: 100dvh;
   }
 
   /* Header */
@@ -39,219 +43,180 @@
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
-    z-index: 100;
+    height: 48px;
   }
-  .logo {
-    font-size: 16px;
-    font-weight: 900;
-    color: var(--accent);
-    letter-spacing: -0.5px;
-  }
+  .logo { font-size: 16px; font-weight: 900; color: var(--accent); }
   .logo span { color: var(--text2); font-weight: 400; }
-  #gps-status {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--text2);
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--text2);
-    animation: none;
-  }
+  #gps-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); font-family: 'JetBrains Mono', monospace; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text2); }
   .dot.active { background: var(--accent); animation: pulse 1.5s infinite; }
   .dot.error { background: var(--danger); }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
 
-  /* Map */
-  #map {
+  /* Map - takes remaining space */
+  #map-container {
     flex: 1;
     position: relative;
     overflow: hidden;
+    min-height: 0;
   }
-  #map iframe {
-    width: 100%; height: 100%;
+  #map-container iframe {
+    width: 100%;
+    height: 100%;
     border: none;
     display: block;
   }
 
-  /* Overlay canvas for drawing */
-  #overlay {
+  /* Floating action button - always visible over map */
+  #fab-mark {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 10;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #0a0f1a;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 900;
+    font-family: 'Noto Sans KR', sans-serif;
+    box-shadow: 0 4px 24px rgba(0,212,170,0.4);
+    cursor: pointer;
+    z-index: 20;
+    white-space: nowrap;
+    transition: all 0.15s;
   }
+  #fab-mark:disabled { background: var(--border); color: var(--text2); box-shadow: none; }
+  #fab-mark:active { transform: translateX(-50%) scale(0.95); }
 
-  /* Bottom Panel */
+  /* Stats overlay - top left of map */
+  #stats-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat-chip {
+    background: rgba(17,24,39,0.92);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    backdrop-filter: blur(8px);
+  }
+  .stat-chip .label { color: var(--text2); font-size: 10px; }
+  .stat-chip .val { color: var(--accent); font-weight: 700; }
+
+  /* Bottom panel - collapsible */
   #bottom-panel {
     background: var(--surface);
     border-top: 1px solid var(--border);
-    padding: 12px 16px;
     flex-shrink: 0;
-    z-index: 100;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
   }
-
-  /* Stats row */
-  .stats-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  .stat-box {
+  #panel-toggle {
+    width: 100%;
     background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 8px 10px;
-    text-align: center;
-  }
-  .stat-label {
-    font-size: 10px;
+    border: none;
+    border-bottom: 1px solid var(--border);
     color: var(--text2);
-    margin-bottom: 2px;
+    font-size: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
   }
-  .stat-value {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .stat-unit {
-    font-size: 10px;
-    color: var(--text2);
+  #panel-content {
+    padding: 12px 14px;
   }
 
-  /* Buttons */
   .btn-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
     margin-bottom: 8px;
   }
-  button {
+  button.action {
     border: none;
     border-radius: var(--radius);
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.15s;
+    padding: 12px;
+    font-size: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
+    transition: opacity 0.15s;
   }
-  #btn-mark {
-    background: var(--accent);
-    color: #0a0f1a;
-    padding: 14px;
-    font-size: 15px;
-    grid-column: 1 / -1;
-  }
-  #btn-mark:active { transform: scale(0.97); }
-  #btn-mark:disabled { background: var(--border); color: var(--text2); }
-  #btn-close {
-    background: var(--surface2);
-    border: 1px solid var(--accent2);
-    color: var(--accent2);
-    padding: 11px;
-    font-size: 13px;
-  }
-  #btn-undo {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text2);
-    padding: 11px;
-    font-size: 13px;
-  }
-  #btn-reset {
-    background: var(--surface2);
-    border: 1px solid var(--danger);
-    color: var(--danger);
-    padding: 11px;
-    font-size: 13px;
-    grid-column: 1 / -1;
-  }
-  button:active { opacity: 0.8; }
+  button.action:active { opacity: 0.7; }
+  #btn-close { background: var(--surface2); border: 1px solid var(--accent2); color: var(--accent2); }
+  #btn-undo { background: var(--surface2); border: 1px solid var(--border); color: var(--text2); }
+  #btn-reset { background: var(--surface2); border: 1px solid var(--danger); color: var(--danger); grid-column: 1/-1; }
 
   /* Points list */
   #points-scroll {
-    max-height: 80px;
+    max-height: 70px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
     margin-top: 8px;
   }
   .point-item {
     background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 10px;
+    border-radius: 6px;
+    padding: 5px 8px;
     font-size: 11px;
     font-family: 'JetBrains Mono', monospace;
     color: var(--text2);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 8px;
   }
   .point-num {
     background: var(--accent);
     color: #0a0f1a;
-    width: 18px; height: 18px;
+    width: 16px; height: 16px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 700;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; flex-shrink: 0;
   }
 
   /* Toast */
   #toast {
     position: fixed;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-20px);
+    top: 60px; left: 50%;
+    transform: translateX(-50%) translateY(-10px);
     background: var(--surface);
     border: 1px solid var(--accent);
     color: var(--accent);
-    padding: 10px 20px;
+    padding: 9px 18px;
     border-radius: 99px;
-    font-size: 13px;
-    font-weight: 700;
-    opacity: 0;
-    transition: all 0.3s;
-    z-index: 999;
-    white-space: nowrap;
+    font-size: 13px; font-weight: 700;
+    opacity: 0; transition: all 0.25s;
+    z-index: 999; white-space: nowrap;
+    pointer-events: none;
   }
-  #toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-  #toast.error {
-    border-color: var(--danger);
-    color: var(--danger);
-  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  #toast.error { border-color: var(--danger); color: var(--danger); }
 
   /* Result modal */
   #result-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 500;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 500; align-items: center; justify-content: center; padding: 20px;
   }
   #result-modal.show { display: flex; }
   .modal-box {
@@ -259,112 +224,62 @@
     border: 1px solid var(--accent);
     border-radius: 20px;
     padding: 28px 24px;
-    width: 100%;
-    max-width: 340px;
-    text-align: center;
+    width: 100%; max-width: 340px; text-align: center;
   }
-  .modal-title {
-    font-size: 14px;
-    color: var(--text2);
-    margin-bottom: 8px;
-  }
-  .modal-area {
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .modal-pyeong {
-    font-size: 18px;
-    color: var(--text2);
-    margin-bottom: 20px;
-  }
-  .modal-points {
-    text-align: left;
-    background: var(--surface2);
-    border-radius: 10px;
-    padding: 12px;
-    margin-bottom: 20px;
-    max-height: 160px;
-    overflow-y: auto;
-  }
-  .modal-point-row {
-    font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--text2);
-    padding: 3px 0;
-    border-bottom: 1px solid var(--border);
-  }
+  .modal-title { font-size: 14px; color: var(--text2); margin-bottom: 8px; }
+  .modal-area { font-size: 38px; font-weight: 900; color: var(--accent); font-family: 'JetBrains Mono', monospace; line-height: 1; margin-bottom: 4px; }
+  .modal-pyeong { font-size: 17px; color: var(--text2); margin-bottom: 20px; }
+  .modal-points { text-align: left; background: var(--surface2); border-radius: 10px; padding: 12px; margin-bottom: 20px; max-height: 150px; overflow-y: auto; }
+  .modal-point-row { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text2); padding: 3px 0; border-bottom: 1px solid var(--border); }
   .modal-point-row:last-child { border-bottom: none; }
-  .modal-btns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .modal-btn-close {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text2);
-    padding: 12px;
-    font-size: 13px;
-    border-radius: 10px;
-  }
-  .modal-btn-new {
-    background: var(--accent);
-    color: #0a0f1a;
-    padding: 12px;
-    font-size: 13px;
-    border-radius: 10px;
-  }
+  .modal-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .modal-btn-close { background: var(--surface2); border: 1px solid var(--border); color: var(--text2); padding: 12px; font-size: 13px; border-radius: 10px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; }
+  .modal-btn-new { background: var(--accent); color: #0a0f1a; padding: 12px; font-size: 13px; border-radius: 10px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; border: none; }
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo">울타리측량 <span>GPS</span></div>
-  <div id="gps-status">
-    <div class="dot" id="gps-dot"></div>
-    <span id="gps-text">GPS 대기중</span>
-  </div>
-</header>
-
-<div id="map">
-  <iframe id="map-frame" src="" scrolling="no"></iframe>
-</div>
-
-<div id="bottom-panel">
-  <div class="stats-row">
-    <div class="stat-box">
-      <div class="stat-label">찍은 점</div>
-      <div class="stat-value" id="stat-points">0</div>
-      <div class="stat-unit">개</div>
+<div id="app">
+  <header>
+    <div class="logo">울타리측량 <span>GPS</span></div>
+    <div id="gps-status">
+      <div class="dot" id="gps-dot"></div>
+      <span id="gps-text">GPS 대기중</span>
     </div>
-    <div class="stat-box">
-      <div class="stat-label">면적(㎡)</div>
-      <div class="stat-value" id="stat-area">-</div>
-      <div class="stat-unit">㎡</div>
+  </header>
+
+  <div id="map-container">
+    <iframe id="map-frame" src="about:blank" scrolling="no" allowfullscreen></iframe>
+
+    <!-- Stats overlay on map -->
+    <div id="stats-overlay">
+      <div class="stat-chip">
+        <div class="label">찍은 점</div>
+        <div class="val"><span id="stat-points">0</span> 개</div>
+      </div>
+      <div class="stat-chip" id="chip-area" style="display:none">
+        <div class="label">면적</div>
+        <div class="val"><span id="stat-area">-</span> ㎡</div>
+        <div class="val"><span id="stat-pyeong">-</span> 평</div>
+      </div>
     </div>
-    <div class="stat-box">
-      <div class="stat-label">면적(평)</div>
-      <div class="stat-value" id="stat-pyeong">-</div>
-      <div class="stat-unit">평</div>
-    </div>
+
+    <!-- FAB button always visible on map -->
+    <button id="fab-mark" disabled>📍 현재 위치 찍기</button>
   </div>
 
-  <div class="btn-row">
-    <button id="btn-mark" disabled>📍 현재 위치 찍기</button>
+  <div id="bottom-panel">
+    <button id="panel-toggle">▲ 메뉴 펼치기</button>
+    <div id="panel-content" style="display:none">
+      <div class="btn-row">
+        <button class="action" id="btn-close">🔒 닫기 (면적계산)</button>
+        <button class="action" id="btn-undo">↩ 마지막 점 삭제</button>
+      </div>
+      <div class="btn-row">
+        <button class="action" id="btn-reset">🗑 전체 초기화</button>
+      </div>
+      <div id="points-scroll"></div>
+    </div>
   </div>
-  <div class="btn-row">
-    <button id="btn-close">🔒 닫기 (면적계산)</button>
-    <button id="btn-undo">↩ 마지막 점 삭제</button>
-  </div>
-  <div class="btn-row">
-    <button id="btn-reset">🗑 전체 초기화</button>
-  </div>
-
-  <div id="points-scroll"></div>
 </div>
 
 <div id="toast"></div>
@@ -386,81 +301,70 @@
 const API_KEY = '2699662E-B096-31F3-9157-CB9AE0DEA5A7';
 let points = [];
 let currentPos = null;
-let mapLoaded = false;
-let mapCenter = null;
+let mapInited = false;
+let panelOpen = false;
 
-// Vworld 지도 iframe URL
-function buildMapUrl(lat, lng) {
-  // Vworld 2D 지도 API 직접 embed
-  return `https://map.vworld.kr/map/maps.do?basemap=HYBRID&lon=${lng}&lat=${lat}&zoom=4&apiKey=${API_KEY}`;
-}
+// Panel toggle
+document.getElementById('panel-toggle').addEventListener('click', () => {
+  panelOpen = !panelOpen;
+  const content = document.getElementById('panel-content');
+  const btn = document.getElementById('panel-toggle');
+  content.style.display = panelOpen ? 'block' : 'none';
+  btn.textContent = panelOpen ? '▼ 메뉴 접기' : '▲ 메뉴 펼치기';
+});
 
-// 지도 초기화
+// Map init
 function initMap(lat, lng) {
-  mapCenter = {lat, lng};
+  if (mapInited) return;
+  mapInited = true;
   const frame = document.getElementById('map-frame');
-  frame.src = buildMapUrl(lat, lng);
-  frame.onload = () => { mapLoaded = true; };
+  // 브이월드 지적도 레이어 포함 URL
+  frame.src = `https://map.vworld.kr/map/maps.do?basemap=HYBRID&lon=${lng}&lat=${lat}&zoom=4&apiKey=${API_KEY}&themamap=LP`;
 }
 
-// GPS 시작
+// GPS
 function startGPS() {
   const dot = document.getElementById('gps-dot');
   const txt = document.getElementById('gps-text');
-
   if (!navigator.geolocation) {
     dot.className = 'dot error';
     txt.textContent = 'GPS 미지원';
     return;
   }
-
-  txt.textContent = '위치 찾는 중...';
-
   navigator.geolocation.watchPosition(
     (pos) => {
       currentPos = { lat: pos.coords.latitude, lng: pos.coords.longitude, acc: pos.coords.accuracy };
       dot.className = 'dot active';
       txt.textContent = `±${Math.round(pos.coords.accuracy)}m`;
-      document.getElementById('btn-mark').disabled = false;
-
-      // 첫 위치 수신시 지도 초기화
-      if (!mapLoaded && !mapCenter) {
-        initMap(pos.coords.latitude, pos.coords.longitude);
-      }
+      document.getElementById('fab-mark').disabled = false;
+      initMap(pos.coords.latitude, pos.coords.longitude);
     },
     (err) => {
       dot.className = 'dot error';
       txt.textContent = 'GPS 오류';
       showToast('GPS 권한을 허용해주세요', true);
     },
-    { enableHighAccuracy: true, maximumAge: 3000, timeout: 15000 }
+    { enableHighAccuracy: true, maximumAge: 3000, timeout: 20000 }
   );
 }
 
-// 좌표 찍기
-document.getElementById('btn-mark').addEventListener('click', () => {
-  if (!currentPos) { showToast('GPS 신호를 기다리는 중...', true); return; }
-
+// 위치 찍기
+document.getElementById('fab-mark').addEventListener('click', () => {
+  if (!currentPos) { showToast('GPS 신호 대기중...', true); return; }
   points.push({ ...currentPos, id: points.length + 1 });
   updateUI();
-  showToast(`📍 ${points.length}번 점 저장!`);
-
-  // 지도 중심 이동 (iframe src 갱신)
-  if (mapCenter) {
-    initMap(currentPos.lat, currentPos.lng);
-  }
+  showToast(`📍 ${points.length}번 점 저장! (±${Math.round(currentPos.acc)}m)`);
 });
 
-// 닫기 (면적 계산)
+// 닫기
 document.getElementById('btn-close').addEventListener('click', () => {
   if (points.length < 3) { showToast('최소 3개 점이 필요합니다', true); return; }
-  const area = calcArea(points);
-  showResult(area);
+  showResult(calcArea(points));
 });
 
-// 마지막 점 삭제
+// 삭제
 document.getElementById('btn-undo').addEventListener('click', () => {
-  if (points.length === 0) return;
+  if (!points.length) return;
   points.pop();
   updateUI();
   showToast('마지막 점 삭제됨');
@@ -468,7 +372,7 @@ document.getElementById('btn-undo').addEventListener('click', () => {
 
 // 초기화
 document.getElementById('btn-reset').addEventListener('click', () => {
-  if (points.length === 0) return;
+  if (!points.length) return;
   if (confirm('모든 측량 데이터를 초기화할까요?')) resetAll();
 });
 
@@ -479,12 +383,11 @@ function resetAll() {
   showToast('초기화 완료');
 }
 
-// 면적 계산 (Shoelace + 구면 보정)
+// 면적 계산
 function calcArea(pts) {
   if (pts.length < 3) return 0;
   const R = 6371000;
   const toRad = d => d * Math.PI / 180;
-
   let area = 0;
   const n = pts.length;
   for (let i = 0; i < n; i++) {
@@ -501,24 +404,23 @@ function calcArea(pts) {
 // UI 업데이트
 function updateUI() {
   document.getElementById('stat-points').textContent = points.length;
-
+  const chipArea = document.getElementById('chip-area');
   if (points.length >= 3) {
     const area = calcArea(points);
     const pyeong = area / 3.305785;
     document.getElementById('stat-area').textContent = area.toFixed(1);
     document.getElementById('stat-pyeong').textContent = pyeong.toFixed(1);
+    chipArea.style.display = 'block';
   } else {
-    document.getElementById('stat-area').textContent = '-';
-    document.getElementById('stat-pyeong').textContent = '-';
+    chipArea.style.display = 'none';
   }
 
-  // 점 목록
   const scroll = document.getElementById('points-scroll');
   scroll.innerHTML = points.map(p => `
     <div class="point-item">
       <div class="point-num">${p.id}</div>
       <span>${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}</span>
-      <span style="color:var(--text2);font-size:10px">±${Math.round(p.acc)}m</span>
+      <span style="color:var(--text2);font-size:10px;margin-left:auto">±${Math.round(p.acc)}m</span>
     </div>
   `).join('');
   scroll.scrollTop = scroll.scrollHeight;
@@ -547,7 +449,6 @@ function showToast(msg, isError = false) {
   toastTimer = setTimeout(() => { t.className = ''; }, 2500);
 }
 
-// 시작
 startGPS();
 </script>
 </body>
