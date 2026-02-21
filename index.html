@@ -15,37 +15,21 @@
   html, body { height: 100%; overflow: hidden; font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); }
   #app { display: flex; flex-direction: column; height: 100dvh; }
 
-  header {
-    background: var(--surface); border-bottom: 1px solid var(--border);
-    padding: 0 10px; display: flex; align-items: center;
-    flex-shrink: 0; height: 48px; gap: 8px; z-index: 100;
-  }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 10px; display: flex; align-items: center; flex-shrink: 0; height: 48px; gap: 8px; z-index: 100; }
   .logo { font-size: 14px; font-weight: 900; color: var(--accent); white-space: nowrap; }
   .logo span { color: var(--text2); font-weight: 400; }
   #search-wrap { flex: 1; display: flex; gap: 4px; }
-  #search-input {
-    flex: 1; background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 8px; color: var(--text); font-size: 13px;
-    font-family: 'Noto Sans KR', sans-serif; padding: 7px 10px; outline: none;
-  }
+  #search-input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13px; font-family: 'Noto Sans KR', sans-serif; padding: 7px 10px; outline: none; }
   #search-input::placeholder { color: var(--text2); }
   #search-input:focus { border-color: var(--accent); }
-  #search-btn {
-    background: var(--accent2); border: none; border-radius: 8px;
-    color: white; padding: 7px 10px; font-size: 13px; cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 700; white-space: nowrap;
-  }
+  #search-btn { background: var(--accent2); border: none; border-radius: 8px; color: white; padding: 7px 10px; font-size: 13px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; white-space: nowrap; }
   #gps-status { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text2); white-space: nowrap; }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text2); flex-shrink: 0; }
   .dot.active { background: var(--accent); animation: pulse 1.5s infinite; }
   .dot.error { background: var(--danger); }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-  #search-results {
-    position: fixed; top: 48px; left: 0; right: 0;
-    background: var(--surface); border-bottom: 1px solid var(--border);
-    z-index: 200; display: none; max-height: 220px; overflow-y: auto;
-  }
+  #search-results { position: fixed; top: 48px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); z-index: 200; display: none; max-height: 220px; overflow-y: auto; }
   .search-item { padding: 11px 14px; border-bottom: 1px solid var(--border); cursor: pointer; font-size: 13px; }
   .search-item:last-child { border-bottom: none; }
   .search-item .addr { font-size: 11px; color: var(--text2); margin-top: 2px; }
@@ -54,36 +38,17 @@
   #map { flex: 1; position: relative; min-height: 0; }
   #kakao-map { width: 100%; height: 100%; }
 
-  #stats-overlay {
-    position: absolute; top: 8px; left: 8px; z-index: 10;
-    display: flex; flex-direction: column; gap: 5px; pointer-events: none;
-  }
-  .stat-chip {
-    background: rgba(10,15,26,0.92); border: 1px solid var(--border);
-    border-radius: 8px; padding: 5px 10px; font-size: 12px;
-    font-family: 'JetBrains Mono', monospace; backdrop-filter: blur(6px);
-  }
+  #stats-overlay { position: absolute; top: 8px; left: 8px; z-index: 10; display: flex; flex-direction: column; gap: 5px; pointer-events: none; }
+  .stat-chip { background: rgba(10,15,26,0.92); border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; font-size: 12px; font-family: 'JetBrains Mono', monospace; backdrop-filter: blur(6px); }
   .stat-chip .lbl { color: var(--text2); font-size: 10px; }
   .stat-chip .val { color: var(--accent); font-weight: 700; }
 
   #map-controls { position: absolute; top: 8px; right: 8px; z-index: 10; display: flex; flex-direction: column; gap: 6px; }
-  .map-btn {
-    background: rgba(10,15,26,0.92); border: 1px solid var(--border);
-    border-radius: 8px; padding: 7px 10px; font-size: 12px;
-    color: var(--text2); cursor: pointer; backdrop-filter: blur(6px);
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 700; white-space: nowrap;
-  }
+  .map-btn { background: rgba(10,15,26,0.92); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 12px; color: var(--text2); cursor: pointer; backdrop-filter: blur(6px); font-family: 'Noto Sans KR', sans-serif; font-weight: 700; white-space: nowrap; }
   .map-btn.on { border-color: var(--accent); color: var(--accent); }
   .map-btn:active { opacity: 0.7; }
 
-  #fab-mark {
-    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
-    background: var(--accent); color: #0a0f1a; border: none; border-radius: 50px;
-    padding: 14px 28px; font-size: 15px; font-weight: 900;
-    font-family: 'Noto Sans KR', sans-serif;
-    box-shadow: 0 4px 20px rgba(0,212,170,0.4);
-    cursor: pointer; z-index: 10; white-space: nowrap; transition: all 0.15s;
-  }
+  #fab-mark { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #0a0f1a; border: none; border-radius: 50px; padding: 14px 28px; font-size: 15px; font-weight: 900; font-family: 'Noto Sans KR', sans-serif; box-shadow: 0 4px 20px rgba(0,212,170,0.4); cursor: pointer; z-index: 10; white-space: nowrap; transition: all 0.15s; }
   #fab-mark:disabled { background: #2a3a55; color: var(--text2); box-shadow: none; }
   #fab-mark:active:not(:disabled) { transform: translateX(-50%) scale(0.96); }
 
@@ -118,20 +83,12 @@
   .mbtn-close { background: var(--surface2); color: var(--text2); }
   .mbtn-new { background: var(--accent); color: #0a0f1a; }
 
-  /* 카카오맵 커스텀 마커 */
-  .kk-marker {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: #00d4aa; border: 2px solid white;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 900; color: #0a0f1a;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-  .kk-myloc {
-    width: 16px; height: 16px; border-radius: 50%;
-    background: rgba(59,130,246,0.9); border: 2px solid white;
-    box-shadow: 0 0 0 4px rgba(59,130,246,0.3);
-  }
+  .kk-marker { width: 28px; height: 28px; border-radius: 50%; background: #00d4aa; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #0a0f1a; box-shadow: 0 2px 8px rgba(0,0,0,0.4); font-family: 'Noto Sans KR', sans-serif; }
+  .kk-myloc { width: 16px; height: 16px; border-radius: 50%; background: rgba(59,130,246,0.9); border: 2px solid white; box-shadow: 0 0 0 4px rgba(59,130,246,0.3); }
+
+  #map-error { position: absolute; inset: 0; background: var(--bg); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 12px; padding: 20px; text-align: center; z-index: 20; }
+  #map-error .err-title { font-size: 16px; font-weight: 700; color: var(--danger); }
+  #map-error .err-msg { font-size: 13px; color: var(--text2); line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -152,6 +109,10 @@
 
   <div id="map">
     <div id="kakao-map"></div>
+    <div id="map-error">
+      <div class="err-title">⚠️ 지도 로드 실패</div>
+      <div class="err-msg" id="err-msg">카카오맵 API 키 또는 도메인 설정을 확인해주세요.</div>
+    </div>
 
     <div id="stats-overlay">
       <div class="stat-chip">
@@ -202,30 +163,44 @@
   </div>
 </div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1c5dca9b086a7ab08f17231a8dcbe49b&libraries=services"></script>
+<script>
+// 카카오맵 로드 실패 감지
+window.kakaoMapError = function() {
+  document.getElementById('map-error').style.display = 'flex';
+  document.getElementById('err-msg').textContent = '도메인 등록이 필요합니다. 카카오 개발자 콘솔에서 도메인을 등록해주세요.';
+};
+</script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b4cddea98b2a3199840525c5e236dbc&libraries=services&autoload=false"></script>
 <script>
 kakao.maps.load(function() {
+  // 로드 성공 확인
+  if (typeof kakao === 'undefined' || typeof kakao.maps === 'undefined') {
+    document.getElementById('map-error').style.display = 'flex';
+    return;
+  }
 
   var map, geocoder;
   var points = [], currentPos = null, panelOpen = false;
-  var cadastralOn = true;
-  var myLocOverlay = null, shapePolyline = null, shapePolygon = null;
-  var markers = [];
+  var cadastralOn = true, myLocOverlay = null;
+  var shapePolyline = null, shapePolygon = null;
   var firstFix = true;
 
-  // ── 지도 초기화 ─────────────────────────────────────
-  map = new kakao.maps.Map(document.getElementById('kakao-map'), {
-    center: new kakao.maps.LatLng(36.5, 127.5),
-    level: 10
-  });
+  // 지도 초기화
+  try {
+    map = new kakao.maps.Map(document.getElementById('kakao-map'), {
+      center: new kakao.maps.LatLng(36.5, 127.5),
+      level: 10
+    });
+    geocoder = new kakao.maps.services.Geocoder();
+    // 지적편집도 레이어
+    map.addOverlayMapTypeId(kakao.maps.MapTypeId.USE_DISTRICT);
+  } catch(e) {
+    document.getElementById('map-error').style.display = 'flex';
+    document.getElementById('err-msg').textContent = '지도 초기화 실패: ' + e.message;
+    return;
+  }
 
-  geocoder = new kakao.maps.services.Geocoder();
-
-  // 지적편집도 레이어 추가
-  var cadastralType = new kakao.maps.MapTypeId;
-  map.addOverlayMapTypeId(kakao.maps.MapTypeId.USE_DISTRICT);
-
-  // ── 지적도 토글 ──────────────────────────────────────
+  // 지적도 토글
   document.getElementById('layer-toggle').addEventListener('click', function() {
     cadastralOn = !cadastralOn;
     if (cadastralOn) {
@@ -239,13 +214,14 @@ kakao.maps.load(function() {
     }
   });
 
-  // ── 내 위치 마커 ─────────────────────────────────────
+  // 내 위치 마커
   function updateMyLoc(lat, lng) {
     var pos = new kakao.maps.LatLng(lat, lng);
     if (!myLocOverlay) {
-      var content = '<div class="kk-myloc"></div>';
       myLocOverlay = new kakao.maps.CustomOverlay({
-        position: pos, content: content, zIndex: 5
+        position: pos,
+        content: '<div class="kk-myloc"></div>',
+        zIndex: 5, yAnchor: 0.5
       });
       myLocOverlay.setMap(map);
     } else {
@@ -253,7 +229,7 @@ kakao.maps.load(function() {
     }
   }
 
-  // ── GPS ──────────────────────────────────────────────
+  // GPS
   function startGPS() {
     var dot = document.getElementById('gps-dot');
     var txt = document.getElementById('gps-text');
@@ -270,8 +246,7 @@ kakao.maps.load(function() {
         map.setLevel(3);
       }
     }, function() {
-      dot.className = 'dot error';
-      txt.textContent = '오류';
+      dot.className = 'dot error'; txt.textContent = '오류';
       showToast('GPS 권한을 허용해주세요', true);
     }, { enableHighAccuracy: true, maximumAge: 3000, timeout: 20000 });
   }
@@ -282,64 +257,45 @@ kakao.maps.load(function() {
     map.setLevel(3);
   });
 
-  // ── 위치 찍기 ────────────────────────────────────────
+  // 위치 찍기
   document.getElementById('fab-mark').addEventListener('click', function() {
     if (!currentPos) { showToast('GPS 신호 대기중...', true); return; }
     var p = { lat: currentPos.lat, lng: currentPos.lng, acc: currentPos.acc, id: points.length + 1 };
     points.push(p);
-    addMarker(p);
-    redrawShape();
-    updateUI();
-    showToast('📍 ' + points.length + '번 점 저장! (±' + Math.round(currentPos.acc) + 'm)');
-  });
-
-  function addMarker(p) {
-    var content = '<div class="kk-marker">' + p.id + '</div>';
     var overlay = new kakao.maps.CustomOverlay({
       position: new kakao.maps.LatLng(p.lat, p.lng),
-      content: content,
-      zIndex: 10,
-      yAnchor: 0.5
+      content: '<div class="kk-marker">' + p.id + '</div>',
+      zIndex: 10, yAnchor: 0.5
     });
     overlay.setMap(map);
     p._overlay = overlay;
-    markers.push(overlay);
-  }
+    redrawShape(); updateUI();
+    showToast('📍 ' + points.length + '번 점 저장! (±' + Math.round(currentPos.acc) + 'm)');
+  });
 
   function redrawShape() {
     if (shapePolyline) { shapePolyline.setMap(null); shapePolyline = null; }
     if (shapePolygon) { shapePolygon.setMap(null); shapePolygon = null; }
     if (points.length < 2) return;
-
     var path = points.map(function(p) { return new kakao.maps.LatLng(p.lat, p.lng); });
-
     if (points.length >= 3) {
       shapePolygon = new kakao.maps.Polygon({
-        path: path,
-        strokeWeight: 2.5,
-        strokeColor: '#00d4aa',
-        strokeOpacity: 1,
-        fillColor: '#00d4aa',
-        fillOpacity: 0.15
+        path: path, strokeWeight: 2.5, strokeColor: '#00d4aa',
+        strokeOpacity: 1, fillColor: '#00d4aa', fillOpacity: 0.15
       });
       shapePolygon.setMap(map);
     } else {
       shapePolyline = new kakao.maps.Polyline({
-        path: path,
-        strokeWeight: 2,
-        strokeColor: '#00d4aa',
-        strokeOpacity: 1,
-        strokeStyle: 'dashed'
+        path: path, strokeWeight: 2, strokeColor: '#00d4aa',
+        strokeOpacity: 1, strokeStyle: 'dashed'
       });
       shapePolyline.setMap(map);
     }
   }
 
-  // ── 검색 ─────────────────────────────────────────────
+  // 검색
   document.getElementById('search-btn').addEventListener('click', doSearch);
-  document.getElementById('search-input').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') doSearch();
-  });
+  document.getElementById('search-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') doSearch(); });
 
   function doSearch() {
     var q = document.getElementById('search-input').value.trim();
@@ -347,19 +303,16 @@ kakao.maps.load(function() {
     var div = document.getElementById('search-results');
     div.innerHTML = '<div class="search-empty">검색중...</div>';
     div.style.display = 'block';
-
     var ps = new kakao.maps.services.Places();
     ps.keywordSearch(q, function(data, status) {
       if (status === kakao.maps.services.Status.OK && data.length) {
         renderResults(data);
       } else {
-        // 주소 검색 시도
         geocoder.addressSearch(q, function(data2, status2) {
           if (status2 === kakao.maps.services.Status.OK && data2.length) {
-            var items = data2.map(function(d) {
+            renderResults(data2.map(function(d) {
               return { place_name: d.address_name, road_address_name: '', x: d.x, y: d.y };
-            });
-            renderResults(items);
+            }));
           } else {
             div.innerHTML = '<div class="search-empty">검색 결과가 없습니다</div>';
           }
@@ -370,17 +323,14 @@ kakao.maps.load(function() {
 
   function renderResults(items) {
     var div = document.getElementById('search-results');
-    div.innerHTML = items.slice(0, 5).map(function(item) {
+    div.innerHTML = items.slice(0,5).map(function(item) {
       return '<div class="search-item" data-x="' + item.x + '" data-y="' + item.y + '">'
         + '<div>' + item.place_name + '</div>'
-        + '<div class="addr">' + (item.road_address_name || item.address_name || '') + '</div>'
-        + '</div>';
+        + '<div class="addr">' + (item.road_address_name || item.address_name || '') + '</div></div>';
     }).join('');
     div.querySelectorAll('.search-item').forEach(function(el) {
       el.addEventListener('click', function() {
-        var x = parseFloat(this.dataset.x);
-        var y = parseFloat(this.dataset.y);
-        map.setCenter(new kakao.maps.LatLng(y, x));
+        map.setCenter(new kakao.maps.LatLng(parseFloat(this.dataset.y), parseFloat(this.dataset.x)));
         map.setLevel(3);
         div.style.display = 'none';
         document.getElementById('search-input').value = '';
@@ -390,12 +340,11 @@ kakao.maps.load(function() {
   }
 
   document.addEventListener('click', function(e) {
-    if (!e.target.closest('#search-wrap') && !e.target.closest('#search-results')) {
+    if (!e.target.closest('#search-wrap') && !e.target.closest('#search-results'))
       document.getElementById('search-results').style.display = 'none';
-    }
   });
 
-  // ── 도구 패널 ─────────────────────────────────────────
+  // 도구 패널
   document.getElementById('panel-toggle').addEventListener('click', function() {
     panelOpen = !panelOpen;
     document.getElementById('panel-content').style.display = panelOpen ? 'block' : 'none';
@@ -411,9 +360,7 @@ kakao.maps.load(function() {
     if (!points.length) return;
     var last = points.pop();
     if (last._overlay) last._overlay.setMap(null);
-    redrawShape();
-    updateUI();
-    showToast('마지막 점 삭제됨');
+    redrawShape(); updateUI(); showToast('마지막 점 삭제됨');
   });
 
   document.getElementById('btn-reset').addEventListener('click', function() {
@@ -428,12 +375,9 @@ kakao.maps.load(function() {
     points.forEach(function(p) { if (p._overlay) p._overlay.setMap(null); });
     if (shapePolyline) { shapePolyline.setMap(null); shapePolyline = null; }
     if (shapePolygon) { shapePolygon.setMap(null); shapePolygon = null; }
-    markers = []; points = [];
-    updateUI(); closeModal();
-    showToast('초기화 완료');
+    points = []; updateUI(); closeModal(); showToast('초기화 완료');
   }
 
-  // ── 면적 계산 ─────────────────────────────────────────
   function calcArea(pts) {
     if (pts.length < 3) return 0;
     var R = 6371000;
@@ -448,7 +392,6 @@ kakao.maps.load(function() {
     return Math.abs(area / 2) * R * R;
   }
 
-  // ── UI ───────────────────────────────────────────────
   function updateUI() {
     document.getElementById('stat-points').textContent = points.length;
     var chipArea = document.getElementById('chip-area');
@@ -472,9 +415,7 @@ kakao.maps.load(function() {
     document.getElementById('modal-area-val').textContent = area.toFixed(2) + ' ㎡';
     document.getElementById('modal-pyeong-val').textContent = pyeong.toFixed(2) + ' 평';
     document.getElementById('modal-points-list').innerHTML =
-      points.map(function(p) {
-        return '<div class="modal-point-row">P' + p.id + ': ' + p.lat.toFixed(7) + ', ' + p.lng.toFixed(7) + '</div>';
-      }).join('');
+      points.map(function(p) { return '<div class="modal-point-row">P' + p.id + ': ' + p.lat.toFixed(7) + ', ' + p.lng.toFixed(7) + '</div>'; }).join('');
     document.getElementById('result-modal').classList.add('show');
   }
 
