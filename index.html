@@ -85,10 +85,6 @@
 
   .kk-marker { width: 28px; height: 28px; border-radius: 50%; background: #00d4aa; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #0a0f1a; box-shadow: 0 2px 8px rgba(0,0,0,0.4); font-family: 'Noto Sans KR', sans-serif; }
   .kk-myloc { width: 16px; height: 16px; border-radius: 50%; background: rgba(59,130,246,0.9); border: 2px solid white; box-shadow: 0 0 0 4px rgba(59,130,246,0.3); }
-
-  #map-error { position: absolute; inset: 0; background: var(--bg); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 12px; padding: 20px; text-align: center; z-index: 20; }
-  #map-error .err-title { font-size: 16px; font-weight: 700; color: var(--danger); }
-  #map-error .err-msg { font-size: 13px; color: var(--text2); line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -109,10 +105,6 @@
 
   <div id="map">
     <div id="kakao-map"></div>
-    <div id="map-error">
-      <div class="err-title">⚠️ 지도 로드 실패</div>
-      <div class="err-msg" id="err-msg">카카오맵 API 키 또는 도메인 설정을 확인해주세요.</div>
-    </div>
 
     <div id="stats-overlay">
       <div class="stat-chip">
@@ -163,42 +155,21 @@
   </div>
 </div>
 
-<script>
-// 카카오맵 로드 실패 감지
-window.kakaoMapError = function() {
-  document.getElementById('map-error').style.display = 'flex';
-  document.getElementById('err-msg').textContent = '도메인 등록이 필요합니다. 카카오 개발자 콘솔에서 도메인을 등록해주세요.';
-};
-</script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b4cddea98b2a3199840525c5e236dbc&libraries=services&autoload=false"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0cab92073d5170cb2b260df96cc5d53&libraries=services&autoload=false"></script>
 <script>
 kakao.maps.load(function() {
-  // 로드 성공 확인
-  if (typeof kakao === 'undefined' || typeof kakao.maps === 'undefined') {
-    document.getElementById('map-error').style.display = 'flex';
-    return;
-  }
-
   var map, geocoder;
   var points = [], currentPos = null, panelOpen = false;
   var cadastralOn = true, myLocOverlay = null;
   var shapePolyline = null, shapePolygon = null;
   var firstFix = true;
 
-  // 지도 초기화
-  try {
-    map = new kakao.maps.Map(document.getElementById('kakao-map'), {
-      center: new kakao.maps.LatLng(36.5, 127.5),
-      level: 10
-    });
-    geocoder = new kakao.maps.services.Geocoder();
-    // 지적편집도 레이어
-    map.addOverlayMapTypeId(kakao.maps.MapTypeId.USE_DISTRICT);
-  } catch(e) {
-    document.getElementById('map-error').style.display = 'flex';
-    document.getElementById('err-msg').textContent = '지도 초기화 실패: ' + e.message;
-    return;
-  }
+  map = new kakao.maps.Map(document.getElementById('kakao-map'), {
+    center: new kakao.maps.LatLng(36.5, 127.5),
+    level: 10
+  });
+  geocoder = new kakao.maps.services.Geocoder();
+  map.addOverlayMapTypeId(kakao.maps.MapTypeId.USE_DISTRICT);
 
   // 지적도 토글
   document.getElementById('layer-toggle').addEventListener('click', function() {
@@ -219,8 +190,7 @@ kakao.maps.load(function() {
     var pos = new kakao.maps.LatLng(lat, lng);
     if (!myLocOverlay) {
       myLocOverlay = new kakao.maps.CustomOverlay({
-        position: pos,
-        content: '<div class="kk-myloc"></div>',
+        position: pos, content: '<div class="kk-myloc"></div>',
         zIndex: 5, yAnchor: 0.5
       });
       myLocOverlay.setMap(map);
