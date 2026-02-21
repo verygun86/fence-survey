@@ -38,53 +38,46 @@
   #map { flex: 1; position: relative; min-height: 0; }
   #kakao-map { width: 100%; height: 100%; }
 
-  /* 모드 전환 탭 */
   #mode-bar {
     position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
     z-index: 10; background: rgba(10,15,26,0.95); border: 1px solid var(--border);
     border-radius: 10px; display: flex; overflow: hidden; backdrop-filter: blur(6px);
   }
-  .mode-btn {
-    padding: 7px 14px; font-size: 12px; font-weight: 700;
-    font-family: 'Noto Sans KR', sans-serif; border: none; cursor: pointer;
-    background: transparent; color: var(--text2); transition: all 0.2s; white-space: nowrap;
-  }
+  .mode-btn { padding: 7px 14px; font-size: 12px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; border: none; cursor: pointer; background: transparent; color: var(--text2); white-space: nowrap; }
   .mode-btn.active { background: var(--accent); color: #0a0f1a; }
 
   #stats-overlay { position: absolute; top: 48px; left: 8px; z-index: 10; display: flex; flex-direction: column; gap: 5px; pointer-events: none; margin-top: 4px; }
   .stat-chip { background: rgba(10,15,26,0.92); border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; font-size: 12px; font-family: 'JetBrains Mono', monospace; backdrop-filter: blur(6px); }
   .stat-chip .lbl { color: var(--text2); font-size: 10px; }
   .stat-chip .val { color: var(--accent); font-weight: 700; }
-  .stat-chip .val.warn { color: var(--warn); }
 
   #map-controls { position: absolute; top: 48px; right: 8px; z-index: 10; display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
   .map-btn { background: rgba(10,15,26,0.92); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 12px; color: var(--text2); cursor: pointer; backdrop-filter: blur(6px); font-family: 'Noto Sans KR', sans-serif; font-weight: 700; white-space: nowrap; }
   .map-btn.on { border-color: var(--accent); color: var(--accent); }
   .map-btn:active { opacity: 0.7; }
 
-  /* 줌 버튼 */
   #zoom-controls { position: absolute; bottom: 80px; right: 12px; z-index: 10; display: flex; flex-direction: column; gap: 4px; }
-  .zoom-btn { width: 38px; height: 38px; background: rgba(10,15,26,0.92); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px); }
+  .zoom-btn { width: 42px; height: 42px; background: rgba(10,15,26,0.92); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 22px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px); }
   .zoom-btn:active { opacity: 0.7; }
 
-  /* FAB - GPS 모드 */
-  #fab-gps {
-    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
-    background: var(--accent); color: #0a0f1a; border: none; border-radius: 50px;
-    padding: 14px 24px; font-size: 15px; font-weight: 900;
-    font-family: 'Noto Sans KR', sans-serif; box-shadow: 0 4px 20px rgba(0,212,170,0.4);
-    cursor: pointer; z-index: 10; white-space: nowrap; transition: all 0.15s;
-  }
+  #fab-gps { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #0a0f1a; border: none; border-radius: 50px; padding: 14px 24px; font-size: 15px; font-weight: 900; font-family: 'Noto Sans KR', sans-serif; box-shadow: 0 4px 20px rgba(0,212,170,0.4); cursor: pointer; z-index: 10; white-space: nowrap; transition: all 0.15s; }
   #fab-gps:disabled { background: #2a3a55; color: var(--text2); box-shadow: none; }
   #fab-gps:active:not(:disabled) { transform: translateX(-50%) scale(0.96); }
 
-  /* 터치 모드 안내 */
-  #touch-hint {
-    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
-    background: rgba(245,158,11,0.15); border: 1px solid var(--warn);
-    color: var(--warn); border-radius: 50px; padding: 10px 20px;
-    font-size: 13px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif;
-    z-index: 10; white-space: nowrap; display: none; text-align: center;
+  #touch-hint { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); background: rgba(245,158,11,0.15); border: 1px solid var(--warn); color: var(--warn); border-radius: 50px; padding: 10px 20px; font-size: 13px; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; z-index: 10; white-space: nowrap; display: none; }
+
+  /* 구간 거리 라벨 */
+  .dist-label {
+    background: rgba(10,15,26,0.88);
+    border: 1px solid var(--warn);
+    color: var(--warn);
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+    pointer-events: none;
   }
 
   #bottom-panel { background: var(--surface); border-top: 1px solid var(--border); flex-shrink: 0; }
@@ -113,9 +106,10 @@
   .modal-title { font-size: 14px; color: var(--text2); margin-bottom: 8px; }
   .modal-area { font-size: 30px; font-weight: 900; color: var(--accent); font-family: 'JetBrains Mono', monospace; line-height: 1.1; margin-bottom: 2px; }
   .modal-sub { font-size: 14px; color: var(--text2); margin-bottom: 6px; }
-  .modal-dist { font-size: 16px; font-weight: 700; color: var(--accent2); margin-bottom: 14px; }
-  .modal-points { text-align: left; background: var(--surface2); border-radius: 10px; padding: 10px; margin-bottom: 14px; max-height: 130px; overflow-y: auto; }
+  .modal-dist { font-size: 15px; font-weight: 700; color: var(--accent2); margin-bottom: 14px; }
+  .modal-points { text-align: left; background: var(--surface2); border-radius: 10px; padding: 10px; margin-bottom: 14px; max-height: 150px; overflow-y: auto; }
   .modal-point-row { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text2); padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .modal-point-row.seg { color: var(--warn); }
   .modal-point-row:last-child { border-bottom: none; }
   .modal-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .mbtn { padding: 12px; font-size: 13px; border-radius: 10px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; border: none; }
@@ -146,13 +140,11 @@
   <div id="map">
     <div id="kakao-map"></div>
 
-    <!-- 모드 전환 -->
     <div id="mode-bar">
       <button class="mode-btn active" id="mode-gps">📍 GPS 찍기</button>
       <button class="mode-btn" id="mode-touch">👆 터치 찍기</button>
     </div>
 
-    <!-- 통계 -->
     <div id="stats-overlay">
       <div class="stat-chip">
         <div class="lbl">찍은 점</div>
@@ -160,7 +152,7 @@
       </div>
       <div class="stat-chip" id="chip-dist" style="display:none">
         <div class="lbl">전체 둘레</div>
-        <div class="val"><span id="stat-dist">-</span> m</div>
+        <div class="val"><span id="stat-dist">-</span></div>
       </div>
       <div class="stat-chip" id="chip-area" style="display:none">
         <div class="lbl">면적</div>
@@ -169,21 +161,17 @@
       </div>
     </div>
 
-    <!-- 지도 컨트롤 -->
     <div id="map-controls">
       <button class="map-btn on" id="layer-toggle">🗺 지적도 ON</button>
       <button class="map-btn" id="btn-myloc">📍 내위치</button>
     </div>
 
-    <!-- 줌 버튼 -->
     <div id="zoom-controls">
       <button class="zoom-btn" id="btn-zoom-in">+</button>
       <button class="zoom-btn" id="btn-zoom-out">−</button>
     </div>
 
-    <!-- GPS 모드 FAB -->
     <button id="fab-gps" disabled>📍 현재 위치 찍기</button>
-    <!-- 터치 모드 안내 -->
     <div id="touch-hint">👆 지도를 터치해서 점을 찍으세요</div>
   </div>
 
@@ -224,15 +212,15 @@ kakao.maps.load(function() {
   var points = [], currentPos = null, panelOpen = false;
   var cadastralOn = true, myLocOverlay = null;
   var shapePolyline = null, shapePolygon = null;
+  var distLabels = []; // 구간 거리 라벨 오버레이 목록
   var firstFix = true;
-  var currentMode = 'gps'; // 'gps' or 'touch'
+  var currentMode = 'gps';
 
-  // 지도 초기화 (더 높은 줌 허용)
   map = new kakao.maps.Map(document.getElementById('kakao-map'), {
     center: new kakao.maps.LatLng(36.5, 127.5),
     level: 10,
-    maxLevel: 14,
-    minLevel: 1  // 최대 확대 (레벨 1이 가장 크게)
+    maxLevel: 13,
+    minLevel: 1
   });
   geocoder = new kakao.maps.services.Geocoder();
   map.addOverlayMapTypeId(kakao.maps.MapTypeId.USE_DISTRICT);
@@ -245,7 +233,6 @@ kakao.maps.load(function() {
     document.getElementById('fab-gps').style.display = '';
     document.getElementById('touch-hint').style.display = 'none';
   });
-
   document.getElementById('mode-touch').addEventListener('click', function() {
     currentMode = 'touch';
     this.className = 'mode-btn active';
@@ -254,7 +241,7 @@ kakao.maps.load(function() {
     document.getElementById('touch-hint').style.display = 'block';
   });
 
-  // ── 지도 터치/클릭으로 점 찍기 ───────────────────────
+  // ── 지도 클릭(터치) ───────────────────────────────────
   kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     if (currentMode !== 'touch') return;
     var latlng = mouseEvent.latLng;
@@ -267,9 +254,54 @@ kakao.maps.load(function() {
     });
     overlay.setMap(map);
     p._overlay = overlay;
-    redrawShape(); updateUI();
+    redrawShape();
+    updateDistLabels();
+    updateUI();
     showToast('👆 ' + points.length + '번 점 찍었어요!', 'warn');
   });
+
+  // ── 구간 거리 라벨 ────────────────────────────────────
+  function updateDistLabels() {
+    // 기존 라벨 전부 제거
+    distLabels.forEach(function(ol) { ol.setMap(null); });
+    distLabels = [];
+
+    if (points.length < 2) return;
+
+    for (var i = 0; i < points.length - 1; i++) {
+      var p1 = points[i], p2 = points[i+1];
+      var dist = haversine(p1, p2);
+      // 중간 좌표
+      var midLat = (p1.lat + p2.lat) / 2;
+      var midLng = (p1.lng + p2.lng) / 2;
+      var label = '<div class="dist-label">' + fmtDist(dist) + '</div>';
+      var ol = new kakao.maps.CustomOverlay({
+        position: new kakao.maps.LatLng(midLat, midLng),
+        content: label,
+        zIndex: 8,
+        yAnchor: 1.5
+      });
+      ol.setMap(map);
+      distLabels.push(ol);
+    }
+
+    // 폴리곤일 때 마지막→첫번째 구간도 표시
+    if (points.length >= 3) {
+      var pLast = points[points.length-1], pFirst = points[0];
+      var dist2 = haversine(pLast, pFirst);
+      var midLat2 = (pLast.lat + pFirst.lat) / 2;
+      var midLng2 = (pLast.lng + pFirst.lng) / 2;
+      var label2 = '<div class="dist-label">' + fmtDist(dist2) + '</div>';
+      var ol2 = new kakao.maps.CustomOverlay({
+        position: new kakao.maps.LatLng(midLat2, midLng2),
+        content: label2,
+        zIndex: 8,
+        yAnchor: 1.5
+      });
+      ol2.setMap(map);
+      distLabels.push(ol2);
+    }
+  }
 
   // ── 지적도 토글 ───────────────────────────────────────
   document.getElementById('layer-toggle').addEventListener('click', function() {
@@ -283,12 +315,14 @@ kakao.maps.load(function() {
     }
   });
 
-  // ── 줌 버튼 ──────────────────────────────────────────
+  // ── 줌 버튼 (레벨 1까지 = 최대 확대) ─────────────────
   document.getElementById('btn-zoom-in').addEventListener('click', function() {
-    map.setLevel(map.getLevel() - 1);
+    var cur = map.getLevel();
+    if (cur > 1) map.setLevel(cur - 1);
   });
   document.getElementById('btn-zoom-out').addEventListener('click', function() {
-    map.setLevel(map.getLevel() + 1);
+    var cur = map.getLevel();
+    if (cur < 13) map.setLevel(cur + 1);
   });
 
   // ── 내 위치 마커 ─────────────────────────────────────
@@ -319,7 +353,7 @@ kakao.maps.load(function() {
       if (firstFix) {
         firstFix = false;
         map.setCenter(new kakao.maps.LatLng(currentPos.lat, currentPos.lng));
-        map.setLevel(3);
+        map.setLevel(2);
       }
     }, function() {
       dot.className = 'dot error'; txt.textContent = '오류';
@@ -344,7 +378,9 @@ kakao.maps.load(function() {
     });
     overlay.setMap(map);
     p._overlay = overlay;
-    redrawShape(); updateUI();
+    redrawShape();
+    updateDistLabels();
+    updateUI();
     showToast('📍 ' + points.length + '번 점 저장! (±' + Math.round(currentPos.acc) + 'm)');
   });
 
@@ -369,7 +405,7 @@ kakao.maps.load(function() {
     }
   }
 
-  // ── 거리 계산 (하버사인) ─────────────────────────────
+  // ── 거리/면적 계산 ────────────────────────────────────
   function haversine(p1, p2) {
     var R = 6371000;
     var toRad = function(d) { return d * Math.PI / 180; };
@@ -383,8 +419,7 @@ kakao.maps.load(function() {
   function calcPerimeter(pts) {
     var total = 0;
     for (var i = 0; i < pts.length; i++) {
-      var j = (i + 1) % pts.length;
-      total += haversine(pts[i], pts[j]);
+      total += haversine(pts[i], pts[(i+1) % pts.length]);
     }
     return total;
   }
@@ -395,17 +430,17 @@ kakao.maps.load(function() {
     var toRad = function(d) { return d * Math.PI / 180; };
     var area = 0, n = pts.length;
     for (var i = 0; i < n; i++) {
-      var j = (i + 1) % n;
-      var xi = toRad(pts[i].lng) * Math.cos(toRad(pts[i].lat)); var yi = toRad(pts[i].lat);
-      var xj = toRad(pts[j].lng) * Math.cos(toRad(pts[j].lat)); var yj = toRad(pts[j].lat);
-      area += (xi * yj - xj * yi);
+      var j = (i+1) % n;
+      var xi = toRad(pts[i].lng)*Math.cos(toRad(pts[i].lat)); var yi = toRad(pts[i].lat);
+      var xj = toRad(pts[j].lng)*Math.cos(toRad(pts[j].lat)); var yj = toRad(pts[j].lat);
+      area += (xi*yj - xj*yi);
     }
-    return Math.abs(area / 2) * R * R;
+    return Math.abs(area/2)*R*R;
   }
 
   function fmtDist(m) {
-    if (m >= 1000) return (m/1000).toFixed(2) + ' km';
-    return m.toFixed(1) + ' m';
+    if (m >= 1000) return (m/1000).toFixed(2) + 'km';
+    return m.toFixed(1) + 'm';
   }
 
   // ── 검색 ─────────────────────────────────────────────
@@ -477,7 +512,10 @@ kakao.maps.load(function() {
     if (!points.length) return;
     var last = points.pop();
     if (last._overlay) last._overlay.setMap(null);
-    redrawShape(); updateUI(); showToast('마지막 점 삭제됨');
+    redrawShape();
+    updateDistLabels();
+    updateUI();
+    showToast('마지막 점 삭제됨');
   });
 
   document.getElementById('btn-reset').addEventListener('click', function() {
@@ -492,60 +530,72 @@ kakao.maps.load(function() {
     points.forEach(function(p) { if (p._overlay) p._overlay.setMap(null); });
     if (shapePolyline) { shapePolyline.setMap(null); shapePolyline = null; }
     if (shapePolygon) { shapePolygon.setMap(null); shapePolygon = null; }
+    distLabels.forEach(function(ol) { ol.setMap(null); }); distLabels = [];
     points = []; updateUI(); closeModal(); showToast('초기화 완료');
   }
 
   // ── UI ───────────────────────────────────────────────
   function updateUI() {
     document.getElementById('stat-points').textContent = points.length;
-    var chipArea = document.getElementById('chip-area');
-    var chipDist = document.getElementById('chip-dist');
-
     if (points.length >= 2) {
       var peri = points.length >= 3 ? calcPerimeter(points) : haversine(points[0], points[1]);
       document.getElementById('stat-dist').textContent = fmtDist(peri);
-      chipDist.style.display = 'block';
+      document.getElementById('chip-dist').style.display = 'block';
     } else {
-      chipDist.style.display = 'none';
+      document.getElementById('chip-dist').style.display = 'none';
     }
-
     if (points.length >= 3) {
       var area = calcArea(points);
       document.getElementById('stat-area').textContent = area.toFixed(1);
-      document.getElementById('stat-pyeong').textContent = (area / 3.305785).toFixed(1);
-      chipArea.style.display = 'block';
+      document.getElementById('stat-pyeong').textContent = (area/3.305785).toFixed(1);
+      document.getElementById('chip-area').style.display = 'block';
     } else {
-      chipArea.style.display = 'none';
+      document.getElementById('chip-area').style.display = 'none';
     }
-
     var scroll = document.getElementById('points-scroll');
-    scroll.innerHTML = points.map(function(p) {
+    scroll.innerHTML = points.map(function(p, i) {
       var cls = p.type === 'touch' ? 'touch' : 'gps';
       var icon = p.type === 'touch' ? '👆' : '📍';
+      var segStr = '';
+      if (i > 0) {
+        var d = haversine(points[i-1], p);
+        segStr = '<span style="margin-left:auto;color:var(--warn);font-size:10px">' + fmtDist(d) + '</span>';
+      }
       return '<div class="point-item">'
         + '<div class="point-num ' + cls + '">' + p.id + '</div>'
-        + '<span>' + icon + ' ' + p.lat.toFixed(6) + ', ' + p.lng.toFixed(6) + '</span>'
-        + (p.acc > 0 ? '<span style="margin-left:auto;font-size:10px">±' + Math.round(p.acc) + 'm</span>' : '')
+        + '<span>' + icon + ' ' + p.lat.toFixed(5) + ', ' + p.lng.toFixed(5) + '</span>'
+        + segStr
         + '</div>';
     }).join('');
     scroll.scrollTop = scroll.scrollHeight;
   }
 
   function showResult(area, peri) {
-    var pyeong = area / 3.305785;
+    var rows = '';
+    // 각 구간 거리
+    for (var i = 0; i < points.length - 1; i++) {
+      var d = haversine(points[i], points[i+1]);
+      rows += '<div class="modal-point-row seg">  P' + (i+1) + '→P' + (i+2) + ': ' + fmtDist(d) + '</div>';
+    }
+    if (points.length >= 3) {
+      var dClose = haversine(points[points.length-1], points[0]);
+      rows += '<div class="modal-point-row seg">  P' + points.length + '→P1: ' + fmtDist(dClose) + '</div>';
+    }
+    // 좌표
+    rows += points.map(function(p) {
+      var icon = p.type === 'touch' ? '👆' : '📍';
+      return '<div class="modal-point-row">' + icon + ' P' + p.id + ': ' + p.lat.toFixed(6) + ', ' + p.lng.toFixed(6) + '</div>';
+    }).join('');
+
     if (area > 0) {
       document.getElementById('modal-area-val').textContent = area.toFixed(2) + ' ㎡';
-      document.getElementById('modal-pyeong-val').textContent = pyeong.toFixed(2) + ' 평';
+      document.getElementById('modal-pyeong-val').textContent = (area/3.305785).toFixed(2) + ' 평';
     } else {
-      document.getElementById('modal-area-val').textContent = '선 측량';
-      document.getElementById('modal-pyeong-val').textContent = '(점 3개 이상이면 면적 계산)';
+      document.getElementById('modal-area-val').textContent = '거리 측량';
+      document.getElementById('modal-pyeong-val').textContent = '(3개 이상이면 면적 계산)';
     }
-    document.getElementById('modal-dist-val').textContent = '둘레/거리: ' + fmtDist(peri);
-    document.getElementById('modal-points-list').innerHTML =
-      points.map(function(p) {
-        var icon = p.type === 'touch' ? '👆' : '📍';
-        return '<div class="modal-point-row">' + icon + ' P' + p.id + ': ' + p.lat.toFixed(7) + ', ' + p.lng.toFixed(7) + '</div>';
-      }).join('');
+    document.getElementById('modal-dist-val').textContent = '전체 둘레: ' + fmtDist(peri);
+    document.getElementById('modal-points-list').innerHTML = rows;
     document.getElementById('result-modal').classList.add('show');
   }
 
