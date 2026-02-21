@@ -60,11 +60,7 @@
     display: flex; align-items: center; justify-content: center;
     flex-direction: column; gap: 12px; z-index: 50;
   }
-  .spinner {
-    width: 36px; height: 36px; border: 3px solid var(--border);
-    border-top-color: var(--accent); border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
+  .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
   #stats-overlay {
@@ -79,10 +75,7 @@
   .stat-chip .lbl { color: var(--text2); font-size: 10px; }
   .stat-chip .val { color: var(--accent); font-weight: 700; }
 
-  #map-controls {
-    position: absolute; top: 8px; right: 8px; z-index: 10;
-    display: flex; flex-direction: column; gap: 6px;
-  }
+  #map-controls { position: absolute; top: 8px; right: 8px; z-index: 10; display: flex; flex-direction: column; gap: 6px; }
   .map-btn {
     background: rgba(10,15,26,0.9); border: 1px solid var(--border);
     border-radius: 8px; padding: 7px 10px; font-size: 12px;
@@ -92,11 +85,10 @@
   .map-btn:active { opacity: 0.7; }
 
   #fab-mark {
-    position: absolute; bottom: 14px; left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent); color: #0a0f1a;
-    border: none; border-radius: 50px; padding: 14px 28px;
-    font-size: 15px; font-weight: 900; font-family: 'Noto Sans KR', sans-serif;
+    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #0a0f1a; border: none; border-radius: 50px;
+    padding: 14px 28px; font-size: 15px; font-weight: 900;
+    font-family: 'Noto Sans KR', sans-serif;
     box-shadow: 0 4px 20px rgba(0,212,170,0.4);
     cursor: pointer; z-index: 10; white-space: nowrap; transition: all 0.15s;
   }
@@ -104,43 +96,19 @@
   #fab-mark:active:not(:disabled) { transform: translateX(-50%) scale(0.96); }
 
   #bottom-panel { background: var(--surface); border-top: 1px solid var(--border); flex-shrink: 0; }
-  #panel-toggle {
-    width: 100%; background: none; border: none;
-    color: var(--text2); font-size: 12px; font-family: 'Noto Sans KR', sans-serif;
-    padding: 8px; cursor: pointer;
-  }
+  #panel-toggle { width: 100%; background: none; border: none; color: var(--text2); font-size: 12px; font-family: 'Noto Sans KR', sans-serif; padding: 8px; cursor: pointer; }
   #panel-content { padding: 10px 12px; display: none; }
   .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 7px; }
-  .act {
-    border: none; border-radius: var(--radius);
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 700;
-    cursor: pointer; padding: 11px; font-size: 13px;
-    display: flex; align-items: center; justify-content: center; gap: 4px;
-  }
+  .act { border: none; border-radius: var(--radius); font-family: 'Noto Sans KR', sans-serif; font-weight: 700; cursor: pointer; padding: 11px; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 4px; }
   .act:active { opacity: 0.7; }
   #btn-calc { background: var(--surface2); border: 1px solid var(--accent2) !important; color: var(--accent2); }
   #btn-undo { background: var(--surface2); border: 1px solid var(--border) !important; color: var(--text2); }
   #btn-reset { background: var(--surface2); border: 1px solid var(--danger) !important; color: var(--danger); grid-column: 1/-1; }
   #points-scroll { max-height: 65px; overflow-y: auto; display: flex; flex-direction: column; gap: 3px; margin-top: 7px; }
-  .point-item {
-    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
-    padding: 4px 8px; font-size: 11px; font-family: 'JetBrains Mono', monospace;
-    color: var(--text2); display: flex; align-items: center; gap: 6px;
-  }
-  .point-num {
-    background: var(--accent); color: #0a0f1a; width: 16px; height: 16px;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 700; flex-shrink: 0;
-  }
+  .point-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text2); display: flex; align-items: center; gap: 6px; }
+  .point-num { background: var(--accent); color: #0a0f1a; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; }
 
-  #toast {
-    position: fixed; top: 58px; left: 50%;
-    transform: translateX(-50%) translateY(-10px);
-    background: var(--surface); border: 1px solid var(--accent);
-    color: var(--accent); padding: 8px 18px; border-radius: 99px;
-    font-size: 13px; font-weight: 700; opacity: 0; transition: all 0.25s;
-    z-index: 999; white-space: nowrap; pointer-events: none;
-  }
+  #toast { position: fixed; top: 58px; left: 50%; transform: translateX(-50%) translateY(-10px); background: var(--surface); border: 1px solid var(--accent); color: var(--accent); padding: 8px 18px; border-radius: 99px; font-size: 13px; font-weight: 700; opacity: 0; transition: all 0.25s; z-index: 999; white-space: nowrap; pointer-events: none; }
   #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   #toast.error { border-color: var(--danger); color: var(--danger); }
 
@@ -184,7 +152,6 @@
       <div class="spinner"></div>
       <div style="color:var(--text2);font-size:13px">지도 불러오는 중...</div>
     </div>
-
     <div id="stats-overlay">
       <div class="stat-chip">
         <div class="lbl">찍은 점</div>
@@ -196,12 +163,10 @@
         <div class="val"><span id="stat-pyeong">-</span> 평</div>
       </div>
     </div>
-
     <div id="map-controls">
       <button class="map-btn" id="layer-toggle">🗺 지적도 ON</button>
       <button class="map-btn" id="btn-myloc">📍 내위치</button>
     </div>
-
     <button id="fab-mark" disabled>📍 현재 위치 찍기</button>
   </div>
 
@@ -234,10 +199,34 @@
   </div>
 </div>
 
-<!-- OL 라이브러리를 가장 마지막에 로드 -->
 <script src="https://cdn.jsdelivr.net/npm/ol@7.3.0/dist/ol.js"></script>
 <script>
-// OL 로드 완료 후 실행
+const API_KEY = '2699662E-B096-31F3-9157-CB9AE0DEA5A7';
+
+// ── JSONP 검색 (CORS 우회) ──────────────────────────────
+let _searchCb = null;
+function searchJSONP(query, type, callback) {
+  const cbName = '_vwCb_' + Date.now();
+  const old = document.getElementById('_vw_jsonp');
+  if (old) old.remove();
+  window[cbName] = function(data) {
+    delete window[cbName];
+    callback(data);
+  };
+  const url = 'https://api.vworld.kr/req/search?service=search&request=search&version=2.0'
+    + '&crs=EPSG:4326&size=5&page=1'
+    + '&query=' + encodeURIComponent(query)
+    + '&type=' + type
+    + '&format=json&errorFormat=json'
+    + '&callback=' + cbName
+    + '&key=' + API_KEY;
+  const s = document.createElement('script');
+  s.id = '_vw_jsonp';
+  s.src = url;
+  s.onerror = function() { callback(null); };
+  document.head.appendChild(s);
+}
+
 window.addEventListener('load', function() {
   if (typeof ol === 'undefined') {
     document.getElementById('loading-overlay').innerHTML =
@@ -248,7 +237,6 @@ window.addEventListener('load', function() {
 });
 
 function initApp() {
-  const API_KEY = '2699662E-B096-31F3-9157-CB9AE0DEA5A7';
   let points = [];
   let currentPos = null;
   let panelOpen = false;
@@ -257,31 +245,28 @@ function initApp() {
   let shapeFeature = null;
   let firstFix = true;
 
-  // ── 지도 초기화 ────────────────────────────────────────
+  // ── 지도 레이어 ──────────────────────────────────────
   const baseLayer = new ol.layer.Tile({
     source: new ol.source.XYZ({
-      url: `https://api.vworld.kr/req/wmts/1.0.0/${API_KEY}/Satellite/{z}/{y}/{x}.jpeg`,
+      url: 'https://api.vworld.kr/req/wmts/1.0.0/' + API_KEY + '/Satellite/{z}/{y}/{x}.jpeg',
       crossOrigin: 'anonymous',
       maxZoom: 19
     })
   });
 
+  // 지적도: WMTS 방식 (WMS보다 안정적)
   const cadastralLayer = new ol.layer.Tile({
-    source: new ol.source.TileWMS({
-      url: 'https://api.vworld.kr/req/wms',
-      params: {
-        SERVICE: 'WMS', VERSION: '1.3.0', REQUEST: 'GetMap',
-        LAYERS: 'LP_PA_CBND_BUBUN', FORMAT: 'image/png',
-        TRANSPARENT: 'true', KEY: API_KEY
-      },
+    source: new ol.source.XYZ({
+      url: 'https://api.vworld.kr/req/wmts/1.0.0/' + API_KEY + '/lp/{z}/{y}/{x}.png',
       crossOrigin: 'anonymous',
-      serverType: 'geoserver'
+      maxZoom: 19
     }),
-    opacity: 0.75
+    opacity: 0.8,
+    visible: true
   });
 
   const vectorSource = new ol.source.Vector();
-  const vectorLayer = new ol.layer.Vector({ source: vectorSource });
+  const vectorLayer = new ol.layer.Vector({ source: vectorSource, zIndex: 10 });
 
   const map = new ol.Map({
     target: 'ol-map',
@@ -293,10 +278,9 @@ function initApp() {
     controls: ol.control.defaults.defaults({ zoom: false, attribution: false })
   });
 
-  // 로딩 오버레이 제거
   document.getElementById('loading-overlay').style.display = 'none';
 
-  // 스타일 함수들
+  // 스타일
   function makeMarkerStyle(num) {
     return new ol.style.Style({
       image: new ol.style.Circle({
@@ -320,26 +304,23 @@ function initApp() {
     })
   });
 
-  // ── 지적도 토글 ─────────────────────────────────────────
+  // ── 지적도 토글 ────────────────────────────────────
   document.getElementById('layer-toggle').addEventListener('click', function() {
     cadastralOn = !cadastralOn;
     cadastralLayer.setVisible(cadastralOn);
     this.textContent = cadastralOn ? '🗺 지적도 ON' : '🗺 지적도 OFF';
   });
 
-  // ── GPS ─────────────────────────────────────────────────
+  // ── GPS ───────────────────────────────────────────
   function startGPS() {
     const dot = document.getElementById('gps-dot');
     const txt = document.getElementById('gps-text');
-    if (!navigator.geolocation) {
-      dot.className = 'dot error'; txt.textContent = '미지원'; return;
-    }
+    if (!navigator.geolocation) { dot.className = 'dot error'; txt.textContent = '미지원'; return; }
     navigator.geolocation.watchPosition(function(pos) {
       currentPos = { lat: pos.coords.latitude, lng: pos.coords.longitude, acc: pos.coords.accuracy };
       dot.className = 'dot active';
       txt.textContent = '±' + Math.round(pos.coords.accuracy) + 'm';
       document.getElementById('fab-mark').disabled = false;
-
       const coord = ol.proj.fromLonLat([currentPos.lng, currentPos.lat]);
       if (!myLocFeature) {
         myLocFeature = new ol.Feature(new ol.geom.Point(coord));
@@ -352,30 +333,27 @@ function initApp() {
         firstFix = false;
         map.getView().animate({ center: coord, zoom: 18, duration: 1000 });
       }
-    }, function(err) {
+    }, function() {
       dot.className = 'dot error';
       txt.textContent = '오류';
       showToast('GPS 권한을 허용해주세요', true);
     }, { enableHighAccuracy: true, maximumAge: 3000, timeout: 20000 });
   }
 
-  // 내위치 버튼
   document.getElementById('btn-myloc').addEventListener('click', function() {
     if (!currentPos) { showToast('GPS 신호 대기중...', true); return; }
     map.getView().animate({ center: ol.proj.fromLonLat([currentPos.lng, currentPos.lat]), zoom: 18, duration: 600 });
   });
 
-  // ── 위치 찍기 ─────────────────────────────────────────
+  // ── 위치 찍기 ─────────────────────────────────────
   document.getElementById('fab-mark').addEventListener('click', function() {
     if (!currentPos) { showToast('GPS 신호 대기중...', true); return; }
     const p = { lat: currentPos.lat, lng: currentPos.lng, acc: currentPos.acc, id: points.length + 1 };
     points.push(p);
-
     const f = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([p.lng, p.lat])));
     f.setStyle(makeMarkerStyle(p.id));
     vectorSource.addFeature(f);
     p._feature = f;
-
     redrawShape();
     updateUI();
     showToast('📍 ' + points.length + '번 점 저장! (±' + Math.round(currentPos.acc) + 'm)');
@@ -400,55 +378,62 @@ function initApp() {
     vectorSource.addFeature(shapeFeature);
   }
 
-  // ── 검색 ───────────────────────────────────────────────
+  // ── 검색 (JSONP) ──────────────────────────────────
   document.getElementById('search-btn').addEventListener('click', doSearch);
   document.getElementById('search-input').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') doSearch();
   });
 
-  async function doSearch() {
+  function doSearch() {
     const q = document.getElementById('search-input').value.trim();
     if (!q) return;
     const div = document.getElementById('search-results');
     div.innerHTML = '<div class="search-empty">검색중...</div>';
     div.style.display = 'block';
-    try {
-      const url = 'https://api.vworld.kr/req/search?service=search&request=search&version=2.0&crs=EPSG:4326&size=5&page=1&query='
-        + encodeURIComponent(q) + '&type=PLACE&format=json&key=' + API_KEY;
-      const res = await fetch(url);
-      const data = await res.json();
-      let items = data?.response?.result?.items || [];
+
+    searchJSONP(q, 'PLACE', function(data) {
+      const items = data && data.response && data.response.result && data.response.result.items
+        ? data.response.result.items : [];
       if (!items.length) {
-        const url2 = 'https://api.vworld.kr/req/search?service=search&request=search&version=2.0&crs=EPSG:4326&size=5&page=1&query='
-          + encodeURIComponent(q) + '&type=ADDRESS&format=json&key=' + API_KEY;
-        const res2 = await fetch(url2);
-        const data2 = await res2.json();
-        items = data2?.response?.result?.items || [];
-      }
-      if (!items.length) { div.innerHTML = '<div class="search-empty">검색 결과가 없습니다</div>'; return; }
-      div.innerHTML = items.map(function(item) {
-        const name = item.title || '';
-        const addr = item.address?.road || item.address?.parcel || '';
-        const x = item.point?.x;
-        const y = item.point?.y;
-        return '<div class="search-item" data-x="'+x+'" data-y="'+y+'">'
-          + '<div>' + name + '</div>'
-          + '<div class="addr">' + addr + '</div>'
-          + '</div>';
-      }).join('');
-      div.querySelectorAll('.search-item').forEach(function(el) {
-        el.addEventListener('click', function() {
-          const x = parseFloat(this.dataset.x);
-          const y = parseFloat(this.dataset.y);
-          map.getView().animate({ center: ol.proj.fromLonLat([x, y]), zoom: 18, duration: 600 });
-          div.style.display = 'none';
-          document.getElementById('search-input').value = '';
-          document.getElementById('search-input').blur();
+        // 주소로 재검색
+        searchJSONP(q, 'ADDRESS', function(data2) {
+          const items2 = data2 && data2.response && data2.response.result && data2.response.result.items
+            ? data2.response.result.items : [];
+          renderResults(items2);
         });
-      });
-    } catch(e) {
-      div.innerHTML = '<div class="search-empty">검색 실패. 연결을 확인해주세요.</div>';
+      } else {
+        renderResults(items);
+      }
+    });
+  }
+
+  function renderResults(items) {
+    const div = document.getElementById('search-results');
+    if (!items || !items.length) {
+      div.innerHTML = '<div class="search-empty">검색 결과가 없습니다</div>';
+      return;
     }
+    div.innerHTML = items.map(function(item, i) {
+      const name = item.title || '';
+      const addr = (item.address && (item.address.road || item.address.parcel)) || '';
+      const x = item.point && item.point.x ? item.point.x : null;
+      const y = item.point && item.point.y ? item.point.y : null;
+      if (!x || !y) return '';
+      return '<div class="search-item" data-x="' + x + '" data-y="' + y + '">'
+        + '<div>' + name + '</div>'
+        + '<div class="addr">' + addr + '</div>'
+        + '</div>';
+    }).join('');
+    div.querySelectorAll('.search-item').forEach(function(el) {
+      el.addEventListener('click', function() {
+        const x = parseFloat(this.dataset.x);
+        const y = parseFloat(this.dataset.y);
+        map.getView().animate({ center: ol.proj.fromLonLat([x, y]), zoom: 18, duration: 600 });
+        div.style.display = 'none';
+        document.getElementById('search-input').value = '';
+        document.getElementById('search-input').blur();
+      });
+    });
   }
 
   document.addEventListener('click', function(e) {
@@ -457,7 +442,7 @@ function initApp() {
     }
   });
 
-  // ── 도구 메뉴 ───────────────────────────────────────────
+  // ── 도구 버튼 ─────────────────────────────────────
   document.getElementById('panel-toggle').addEventListener('click', function() {
     panelOpen = !panelOpen;
     document.getElementById('panel-content').style.display = panelOpen ? 'block' : 'none';
@@ -495,7 +480,7 @@ function initApp() {
     showToast('초기화 완료');
   }
 
-  // ── 면적 계산 ───────────────────────────────────────────
+  // ── 면적 계산 ─────────────────────────────────────
   function calcArea(pts) {
     if (pts.length < 3) return 0;
     const R = 6371000;
@@ -513,7 +498,7 @@ function initApp() {
     return Math.abs(area / 2) * R * R;
   }
 
-  // ── UI ─────────────────────────────────────────────────
+  // ── UI ────────────────────────────────────────────
   function updateUI() {
     document.getElementById('stat-points').textContent = points.length;
     const chipArea = document.getElementById('chip-area');
@@ -547,9 +532,7 @@ function initApp() {
     document.getElementById('result-modal').classList.add('show');
   }
 
-  function closeModal() {
-    document.getElementById('result-modal').classList.remove('show');
-  }
+  function closeModal() { document.getElementById('result-modal').classList.remove('show'); }
 
   let toastTimer;
   function showToast(msg, isError) {
