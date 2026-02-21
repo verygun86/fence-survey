@@ -16,37 +16,21 @@
   html, body { height: 100%; overflow: hidden; font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); }
   #app { display: flex; flex-direction: column; height: 100dvh; }
 
-  header {
-    background: var(--surface); border-bottom: 1px solid var(--border);
-    padding: 0 10px; display: flex; align-items: center;
-    flex-shrink: 0; height: 48px; gap: 8px; z-index: 100;
-  }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 10px; display: flex; align-items: center; flex-shrink: 0; height: 48px; gap: 8px; z-index: 100; }
   .logo { font-size: 14px; font-weight: 900; color: var(--accent); white-space: nowrap; }
   .logo span { color: var(--text2); font-weight: 400; }
   #search-wrap { flex: 1; display: flex; gap: 4px; }
-  #search-input {
-    flex: 1; background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 8px; color: var(--text); font-size: 13px;
-    font-family: 'Noto Sans KR', sans-serif; padding: 7px 10px; outline: none;
-  }
+  #search-input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13px; font-family: 'Noto Sans KR', sans-serif; padding: 7px 10px; outline: none; }
   #search-input::placeholder { color: var(--text2); }
   #search-input:focus { border-color: var(--accent); }
-  #search-btn {
-    background: var(--accent2); border: none; border-radius: 8px;
-    color: white; padding: 7px 10px; font-size: 13px; cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 700; white-space: nowrap;
-  }
+  #search-btn { background: var(--accent2); border: none; border-radius: 8px; color: white; padding: 7px 10px; font-size: 13px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; white-space: nowrap; }
   #gps-status { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text2); white-space: nowrap; }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text2); flex-shrink: 0; }
   .dot.active { background: var(--accent); animation: pulse 1.5s infinite; }
   .dot.error { background: var(--danger); }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-  #search-results {
-    position: fixed; top: 48px; left: 0; right: 0;
-    background: var(--surface); border-bottom: 1px solid var(--border);
-    z-index: 200; display: none; max-height: 220px; overflow-y: auto;
-  }
+  #search-results { position: fixed; top: 48px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); z-index: 200; display: none; max-height: 220px; overflow-y: auto; }
   .search-item { padding: 11px 14px; border-bottom: 1px solid var(--border); cursor: pointer; font-size: 13px; }
   .search-item:last-child { border-bottom: none; }
   .search-item .addr { font-size: 11px; color: var(--text2); margin-top: 2px; }
@@ -55,43 +39,21 @@
   #map { flex: 1; position: relative; min-height: 0; }
   #ol-map { width: 100%; height: 100%; }
 
-  #loading-overlay {
-    position: absolute; inset: 0; background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 12px; z-index: 50;
-  }
+  #loading-overlay { position: absolute; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; z-index: 50; }
   .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  #stats-overlay {
-    position: absolute; top: 8px; left: 8px; z-index: 10;
-    display: flex; flex-direction: column; gap: 5px; pointer-events: none;
-  }
-  .stat-chip {
-    background: rgba(10,15,26,0.9); border: 1px solid var(--border);
-    border-radius: 8px; padding: 5px 10px; font-size: 12px;
-    font-family: 'JetBrains Mono', monospace; backdrop-filter: blur(6px);
-  }
+  #stats-overlay { position: absolute; top: 8px; left: 8px; z-index: 10; display: flex; flex-direction: column; gap: 5px; pointer-events: none; }
+  .stat-chip { background: rgba(10,15,26,0.9); border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; font-size: 12px; font-family: 'JetBrains Mono', monospace; backdrop-filter: blur(6px); }
   .stat-chip .lbl { color: var(--text2); font-size: 10px; }
   .stat-chip .val { color: var(--accent); font-weight: 700; }
 
   #map-controls { position: absolute; top: 8px; right: 8px; z-index: 10; display: flex; flex-direction: column; gap: 6px; }
-  .map-btn {
-    background: rgba(10,15,26,0.9); border: 1px solid var(--border);
-    border-radius: 8px; padding: 7px 10px; font-size: 12px;
-    color: var(--text2); cursor: pointer; backdrop-filter: blur(6px);
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 700; white-space: nowrap;
-  }
+  .map-btn { background: rgba(10,15,26,0.9); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 12px; color: var(--text2); cursor: pointer; backdrop-filter: blur(6px); font-family: 'Noto Sans KR', sans-serif; font-weight: 700; white-space: nowrap; }
   .map-btn:active { opacity: 0.7; }
+  .map-btn.on { border-color: var(--accent); color: var(--accent); }
 
-  #fab-mark {
-    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
-    background: var(--accent); color: #0a0f1a; border: none; border-radius: 50px;
-    padding: 14px 28px; font-size: 15px; font-weight: 900;
-    font-family: 'Noto Sans KR', sans-serif;
-    box-shadow: 0 4px 20px rgba(0,212,170,0.4);
-    cursor: pointer; z-index: 10; white-space: nowrap; transition: all 0.15s;
-  }
+  #fab-mark { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #0a0f1a; border: none; border-radius: 50px; padding: 14px 28px; font-size: 15px; font-weight: 900; font-family: 'Noto Sans KR', sans-serif; box-shadow: 0 4px 20px rgba(0,212,170,0.4); cursor: pointer; z-index: 10; white-space: nowrap; transition: all 0.15s; }
   #fab-mark:disabled { background: #2a3a55; color: var(--text2); box-shadow: none; }
   #fab-mark:active:not(:disabled) { transform: translateX(-50%) scale(0.96); }
 
@@ -164,7 +126,7 @@
       </div>
     </div>
     <div id="map-controls">
-      <button class="map-btn" id="layer-toggle">🗺 지적도 ON</button>
+      <button class="map-btn on" id="layer-toggle">🗺 지적도 ON</button>
       <button class="map-btn" id="btn-myloc">📍 내위치</button>
     </div>
     <button id="fab-mark" disabled>📍 현재 위치 찍기</button>
@@ -203,16 +165,12 @@
 <script>
 const API_KEY = '2699662E-B096-31F3-9157-CB9AE0DEA5A7';
 
-// ── JSONP 검색 (CORS 우회) ──────────────────────────────
-let _searchCb = null;
+// JSONP 검색 (CORS 우회)
 function searchJSONP(query, type, callback) {
   const cbName = '_vwCb_' + Date.now();
   const old = document.getElementById('_vw_jsonp');
   if (old) old.remove();
-  window[cbName] = function(data) {
-    delete window[cbName];
-    callback(data);
-  };
+  window[cbName] = function(data) { delete window[cbName]; callback(data); };
   const url = 'https://api.vworld.kr/req/search?service=search&request=search&version=2.0'
     + '&crs=EPSG:4326&size=5&page=1'
     + '&query=' + encodeURIComponent(query)
@@ -221,8 +179,7 @@ function searchJSONP(query, type, callback) {
     + '&callback=' + cbName
     + '&key=' + API_KEY;
   const s = document.createElement('script');
-  s.id = '_vw_jsonp';
-  s.src = url;
+  s.id = '_vw_jsonp'; s.src = url;
   s.onerror = function() { callback(null); };
   document.head.appendChild(s);
 }
@@ -237,29 +194,35 @@ window.addEventListener('load', function() {
 });
 
 function initApp() {
-  let points = [];
-  let currentPos = null;
-  let panelOpen = false;
-  let cadastralOn = true;
-  let myLocFeature = null;
-  let shapeFeature = null;
-  let firstFix = true;
+  let points = [], currentPos = null, panelOpen = false;
+  let cadastralOn = true, myLocFeature = null, shapeFeature = null, firstFix = true;
 
-  // ── 지도 레이어 ──────────────────────────────────────
+  // 위성 배경
   const baseLayer = new ol.layer.Tile({
     source: new ol.source.XYZ({
       url: 'https://api.vworld.kr/req/wmts/1.0.0/' + API_KEY + '/Satellite/{z}/{y}/{x}.jpeg',
-      crossOrigin: 'anonymous',
-      maxZoom: 19
+      crossOrigin: 'anonymous', maxZoom: 19
     })
   });
 
-  // 지적도: WMTS 방식 (WMS보다 안정적)
+  // 지적도 WMS - lt_c_landinfobasemap (LX맵 연속지적도)
   const cadastralLayer = new ol.layer.Tile({
-    source: new ol.source.XYZ({
-      url: 'https://api.vworld.kr/req/wmts/1.0.0/' + API_KEY + '/lp/{z}/{y}/{x}.png',
+    source: new ol.source.TileWMS({
+      url: 'https://api.vworld.kr/req/wms',
+      params: {
+        SERVICE: 'WMS',
+        VERSION: '1.3.0',
+        REQUEST: 'GetMap',
+        LAYERS: 'lt_c_landinfobasemap',
+        STYLES: 'lt_c_landinfobasemap',
+        FORMAT: 'image/png',
+        TRANSPARENT: 'true',
+        KEY: API_KEY,
+        DOMAIN: 'verygun86.github.io'
+      },
       crossOrigin: 'anonymous',
-      maxZoom: 19
+      serverType: 'geoserver',
+      transition: 0
     }),
     opacity: 0.8,
     visible: true
@@ -271,16 +234,12 @@ function initApp() {
   const map = new ol.Map({
     target: 'ol-map',
     layers: [baseLayer, cadastralLayer, vectorLayer],
-    view: new ol.View({
-      center: ol.proj.fromLonLat([127.5, 36.5]),
-      zoom: 7, minZoom: 6, maxZoom: 20
-    }),
+    view: new ol.View({ center: ol.proj.fromLonLat([127.5, 36.5]), zoom: 7, minZoom: 6, maxZoom: 20 }),
     controls: ol.control.defaults.defaults({ zoom: false, attribution: false })
   });
 
   document.getElementById('loading-overlay').style.display = 'none';
 
-  // 스타일
   function makeMarkerStyle(num) {
     return new ol.style.Style({
       image: new ol.style.Circle({
@@ -304,14 +263,15 @@ function initApp() {
     })
   });
 
-  // ── 지적도 토글 ────────────────────────────────────
+  // 지적도 토글
   document.getElementById('layer-toggle').addEventListener('click', function() {
     cadastralOn = !cadastralOn;
     cadastralLayer.setVisible(cadastralOn);
     this.textContent = cadastralOn ? '🗺 지적도 ON' : '🗺 지적도 OFF';
+    this.className = cadastralOn ? 'map-btn on' : 'map-btn';
   });
 
-  // ── GPS ───────────────────────────────────────────
+  // GPS
   function startGPS() {
     const dot = document.getElementById('gps-dot');
     const txt = document.getElementById('gps-text');
@@ -329,13 +289,9 @@ function initApp() {
       } else {
         myLocFeature.getGeometry().setCoordinates(coord);
       }
-      if (firstFix) {
-        firstFix = false;
-        map.getView().animate({ center: coord, zoom: 18, duration: 1000 });
-      }
+      if (firstFix) { firstFix = false; map.getView().animate({ center: coord, zoom: 18, duration: 1000 }); }
     }, function() {
-      dot.className = 'dot error';
-      txt.textContent = '오류';
+      dot.className = 'dot error'; txt.textContent = '오류';
       showToast('GPS 권한을 허용해주세요', true);
     }, { enableHighAccuracy: true, maximumAge: 3000, timeout: 20000 });
   }
@@ -345,7 +301,7 @@ function initApp() {
     map.getView().animate({ center: ol.proj.fromLonLat([currentPos.lng, currentPos.lat]), zoom: 18, duration: 600 });
   });
 
-  // ── 위치 찍기 ─────────────────────────────────────
+  // 위치 찍기
   document.getElementById('fab-mark').addEventListener('click', function() {
     if (!currentPos) { showToast('GPS 신호 대기중...', true); return; }
     const p = { lat: currentPos.lat, lng: currentPos.lng, acc: currentPos.acc, id: points.length + 1 };
@@ -354,8 +310,7 @@ function initApp() {
     f.setStyle(makeMarkerStyle(p.id));
     vectorSource.addFeature(f);
     p._feature = f;
-    redrawShape();
-    updateUI();
+    redrawShape(); updateUI();
     showToast('📍 ' + points.length + '번 점 저장! (±' + Math.round(currentPos.acc) + 'm)');
   });
 
@@ -366,8 +321,8 @@ function initApp() {
     if (points.length >= 3) {
       shapeFeature = new ol.Feature(new ol.geom.Polygon([[...coords, coords[0]]]));
       shapeFeature.setStyle(new ol.style.Style({
-        fill: new ol.style.Fill({ color: 'rgba(0,212,170,0.12)' }),
-        stroke: new ol.style.Stroke({ color: '#00d4aa', width: 2 })
+        fill: new ol.style.Fill({ color: 'rgba(0,212,170,0.15)' }),
+        stroke: new ol.style.Stroke({ color: '#00d4aa', width: 2.5 })
       }));
     } else {
       shapeFeature = new ol.Feature(new ol.geom.LineString(coords));
@@ -378,11 +333,9 @@ function initApp() {
     vectorSource.addFeature(shapeFeature);
   }
 
-  // ── 검색 (JSONP) ──────────────────────────────────
+  // 검색 (JSONP)
   document.getElementById('search-btn').addEventListener('click', doSearch);
-  document.getElementById('search-input').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') doSearch();
-  });
+  document.getElementById('search-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') doSearch(); });
 
   function doSearch() {
     const q = document.getElementById('search-input').value.trim();
@@ -390,45 +343,29 @@ function initApp() {
     const div = document.getElementById('search-results');
     div.innerHTML = '<div class="search-empty">검색중...</div>';
     div.style.display = 'block';
-
     searchJSONP(q, 'PLACE', function(data) {
-      const items = data && data.response && data.response.result && data.response.result.items
-        ? data.response.result.items : [];
+      const items = data && data.response && data.response.result && data.response.result.items ? data.response.result.items : [];
       if (!items.length) {
-        // 주소로 재검색
         searchJSONP(q, 'ADDRESS', function(data2) {
-          const items2 = data2 && data2.response && data2.response.result && data2.response.result.items
-            ? data2.response.result.items : [];
-          renderResults(items2);
+          renderResults(data2 && data2.response && data2.response.result && data2.response.result.items ? data2.response.result.items : []);
         });
-      } else {
-        renderResults(items);
-      }
+      } else { renderResults(items); }
     });
   }
 
   function renderResults(items) {
     const div = document.getElementById('search-results');
-    if (!items || !items.length) {
-      div.innerHTML = '<div class="search-empty">검색 결과가 없습니다</div>';
-      return;
-    }
-    div.innerHTML = items.map(function(item, i) {
+    if (!items || !items.length) { div.innerHTML = '<div class="search-empty">검색 결과가 없습니다</div>'; return; }
+    div.innerHTML = items.map(function(item) {
       const name = item.title || '';
       const addr = (item.address && (item.address.road || item.address.parcel)) || '';
-      const x = item.point && item.point.x ? item.point.x : null;
-      const y = item.point && item.point.y ? item.point.y : null;
+      const x = item.point && item.point.x; const y = item.point && item.point.y;
       if (!x || !y) return '';
-      return '<div class="search-item" data-x="' + x + '" data-y="' + y + '">'
-        + '<div>' + name + '</div>'
-        + '<div class="addr">' + addr + '</div>'
-        + '</div>';
+      return '<div class="search-item" data-x="' + x + '" data-y="' + y + '"><div>' + name + '</div><div class="addr">' + addr + '</div></div>';
     }).join('');
     div.querySelectorAll('.search-item').forEach(function(el) {
       el.addEventListener('click', function() {
-        const x = parseFloat(this.dataset.x);
-        const y = parseFloat(this.dataset.y);
-        map.getView().animate({ center: ol.proj.fromLonLat([x, y]), zoom: 18, duration: 600 });
+        map.getView().animate({ center: ol.proj.fromLonLat([parseFloat(this.dataset.x), parseFloat(this.dataset.y)]), zoom: 18, duration: 600 });
         div.style.display = 'none';
         document.getElementById('search-input').value = '';
         document.getElementById('search-input').blur();
@@ -437,12 +374,11 @@ function initApp() {
   }
 
   document.addEventListener('click', function(e) {
-    if (!e.target.closest('#search-wrap') && !e.target.closest('#search-results')) {
+    if (!e.target.closest('#search-wrap') && !e.target.closest('#search-results'))
       document.getElementById('search-results').style.display = 'none';
-    }
   });
 
-  // ── 도구 버튼 ─────────────────────────────────────
+  // 도구 패널
   document.getElementById('panel-toggle').addEventListener('click', function() {
     panelOpen = !panelOpen;
     document.getElementById('panel-content').style.display = panelOpen ? 'block' : 'none';
@@ -458,9 +394,7 @@ function initApp() {
     if (!points.length) return;
     const last = points.pop();
     if (last._feature) vectorSource.removeFeature(last._feature);
-    redrawShape();
-    updateUI();
-    showToast('마지막 점 삭제됨');
+    redrawShape(); updateUI(); showToast('마지막 점 삭제됨');
   });
 
   document.getElementById('btn-reset').addEventListener('click', function() {
@@ -474,31 +408,23 @@ function initApp() {
   function resetAll() {
     points.forEach(function(p) { if (p._feature) vectorSource.removeFeature(p._feature); });
     if (shapeFeature) { vectorSource.removeFeature(shapeFeature); shapeFeature = null; }
-    points = [];
-    updateUI();
-    closeModal();
-    showToast('초기화 완료');
+    points = []; updateUI(); closeModal(); showToast('초기화 완료');
   }
 
-  // ── 면적 계산 ─────────────────────────────────────
   function calcArea(pts) {
     if (pts.length < 3) return 0;
     const R = 6371000;
     const toRad = function(d) { return d * Math.PI / 180; };
-    let area = 0;
-    const n = pts.length;
+    let area = 0; const n = pts.length;
     for (let i = 0; i < n; i++) {
       const j = (i + 1) % n;
-      const xi = toRad(pts[i].lng) * Math.cos(toRad(pts[i].lat));
-      const yi = toRad(pts[i].lat);
-      const xj = toRad(pts[j].lng) * Math.cos(toRad(pts[j].lat));
-      const yj = toRad(pts[j].lat);
+      const xi = toRad(pts[i].lng) * Math.cos(toRad(pts[i].lat)); const yi = toRad(pts[i].lat);
+      const xj = toRad(pts[j].lng) * Math.cos(toRad(pts[j].lat)); const yj = toRad(pts[j].lat);
       area += (xi * yj - xj * yi);
     }
     return Math.abs(area / 2) * R * R;
   }
 
-  // ── UI ────────────────────────────────────────────
   function updateUI() {
     document.getElementById('stat-points').textContent = points.length;
     const chipArea = document.getElementById('chip-area');
@@ -507,16 +433,12 @@ function initApp() {
       document.getElementById('stat-area').textContent = area.toFixed(1);
       document.getElementById('stat-pyeong').textContent = (area / 3.305785).toFixed(1);
       chipArea.style.display = 'block';
-    } else {
-      chipArea.style.display = 'none';
-    }
+    } else { chipArea.style.display = 'none'; }
     const scroll = document.getElementById('points-scroll');
     scroll.innerHTML = points.map(function(p) {
-      return '<div class="point-item">'
-        + '<div class="point-num">' + p.id + '</div>'
+      return '<div class="point-item"><div class="point-num">' + p.id + '</div>'
         + '<span>' + p.lat.toFixed(6) + ', ' + p.lng.toFixed(6) + '</span>'
-        + '<span style="margin-left:auto;font-size:10px">±' + Math.round(p.acc) + 'm</span>'
-        + '</div>';
+        + '<span style="margin-left:auto;font-size:10px">±' + Math.round(p.acc) + 'm</span></div>';
     }).join('');
     scroll.scrollTop = scroll.scrollHeight;
   }
@@ -526,9 +448,7 @@ function initApp() {
     document.getElementById('modal-area-val').textContent = area.toFixed(2) + ' ㎡';
     document.getElementById('modal-pyeong-val').textContent = pyeong.toFixed(2) + ' 평';
     document.getElementById('modal-points-list').innerHTML =
-      points.map(function(p) {
-        return '<div class="modal-point-row">P' + p.id + ': ' + p.lat.toFixed(7) + ', ' + p.lng.toFixed(7) + '</div>';
-      }).join('');
+      points.map(function(p) { return '<div class="modal-point-row">P' + p.id + ': ' + p.lat.toFixed(7) + ', ' + p.lng.toFixed(7) + '</div>'; }).join('');
     document.getElementById('result-modal').classList.add('show');
   }
 
@@ -537,8 +457,7 @@ function initApp() {
   let toastTimer;
   function showToast(msg, isError) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = 'show' + (isError ? ' error' : '');
+    t.textContent = msg; t.className = 'show' + (isError ? ' error' : '');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function() { t.className = ''; }, 2500);
   }
