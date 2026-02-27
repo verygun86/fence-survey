@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>측량 결과 지도</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: #f0f4f8; }
+  #header {
+    background: #1a2333; color: white; padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  #header h1 { font-size: 18px; font-weight: 900; color: #00d4aa; }
+  #header .info { font-size: 13px; color: #94a3b8; }
+  #summary {
+    background: white; border-bottom: 2px solid #e2e8f0;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  .sum-item {
+    padding: 12px 24px; text-align: center;
+    border-right: 1px solid #e2e8f0; flex-shrink: 0;
+  }
+  .sum-item .lbl { font-size: 11px; color: #94a3b8; }
+  .sum-item .val { font-size: 20px; font-weight: 900; color: #00d4aa; }
+  .sum-item .val2 { font-size: 13px; color: #3b82f6; }
+  #map-container { width: 100%; height: calc(100vh - 120px); }
+  #kakao-map { width: 100%; height: 100%; }
+
+  .my-marker {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #00d4aa; border: 3px solid white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 900; color: #0a0f1a;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  .dist-label {
+    background: rgba(245,158,11,0.95);
+    border-radius: 5px; padding: 2px 7px;
+    font-size: 12px; font-weight: 700; color: #0a0f1a;
+    white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="header">
+  <h1>📐 측량 결과 지도</h1>
+  <div class="info">GPS 측량 · 2025</div>
+</div>
+
+<div id="summary">
+  <div class="sum-item">
+    <div class="lbl">총 점 수</div>
+    <div class="val">22개</div>
+  </div>
+  <div class="sum-item">
+    <div class="lbl">면적</div>
+    <div class="val">2,809 ㎡</div>
+    <div class="val2">849.72 평</div>
+  </div>
+  <div class="sum-item">
+    <div class="lbl">전체 둘레</div>
+    <div class="val">222.9m</div>
+  </div>
+</div>
+
+<div id="map-container">
+  <div id="kakao-map"></div>
+</div>
+
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0cab92073d5170cb2b260df96cc5d53&autoload=false"></script>
+<script>
+kakao.maps.load(function() {
+
+  var points = [
+    { id:1,  lat:37.742038, lng:127.101458 },
+    { id:2,  lat:37.742065, lng:127.101508 },
+    { id:3,  lat:37.742085, lng:127.101561 },
+    { id:4,  lat:37.742098, lng:127.101608 },
+    { id:5,  lat:37.741987, lng:127.101723 },
+    { id:6,  lat:37.741979, lng:127.101840 },
+    { id:7,  lat:37.742047, lng:127.101877 },
+    { id:8,  lat:37.741954, lng:127.102124 },
+    { id:9,  lat:37.741911, lng:127.102164 },
+    { id:10, lat:37.741866, lng:127.102174 },
+    { id:11, lat:37.741783, lng:127.102120 },
+    { id:12, lat:37.741731, lng:127.102054 },
+    { id:13, lat:37.741683, lng:127.101969 },
+    { id:14, lat:37.741570, lng:127.101725 },
+    { id:15, lat:37.741574, lng:127.101656 },
+    { id:16, lat:37.741598, lng:127.101625 },
+    { id:17, lat:37.741662, lng:127.101565 },
+    { id:18, lat:37.741632, lng:127.101500 },
+    { id:19, lat:37.741869, lng:127.101288 },
+    { id:20, lat:37.741890, lng:127.101337 },
+    { id:21, lat:37.741936, lng:127.101305 },
+    { id:22, lat:37.742005, lng:127.101410 }
+  ];
+
+  // 중심 좌표 계산
+  var avgLat = points.reduce(function(s,p){return s+p.lat;},0)/points.length;
+  var avgLng = points.reduce(function(s,p){return s+p.lng;},0)/points.length;
+
+  var map = new kakao.maps.Map(document.getElementById('kakao-map'), {
+    center: new kakao.maps.LatLng(avgLat, avgLng),
+    level: 4
+  });
+
+  // 지적도 레이어
+  map.addOverlayMapTypeId(kakao.maps.MapTypeId.USE_DISTRICT);
+
+  // 폴리곤
+  var path = points.map(function(p){ return new kakao.maps.LatLng(p.lat, p.lng); });
+  var polygon = new kakao.maps.Polygon({
+    path: path,
+    strokeWeight: 3,
+    strokeColor: '#00d4aa',
+    strokeOpacity: 1,
+    fillColor: '#00d4aa',
+    fillOpacity: 0.18
+  });
+  polygon.setMap(map);
+
+  // 마커
+  points.forEach(function(p) {
+    var overlay = new kakao.maps.CustomOverlay({
+      position: new kakao.maps.LatLng(p.lat, p.lng),
+      content: '<div class="my-marker">' + p.id + '</div>',
+      zIndex: 10, yAnchor: 0.5
+    });
+    overlay.setMap(map);
+  });
+
+  // 거리 계산
+  function haversine(p1, p2) {
+    var R = 6371000;
+    var toRad = function(d){ return d * Math.PI / 180; };
+    var dLat = toRad(p2.lat - p1.lat);
+    var dLng = toRad(p2.lng - p1.lng);
+    var a = Math.sin(dLat/2)*Math.sin(dLat/2) +
+            Math.cos(toRad(p1.lat))*Math.cos(toRad(p2.lat))*Math.sin(dLng/2)*Math.sin(dLng/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+  // 구간 거리 라벨
+  for (var i = 0; i < points.length; i++) {
+    var p1 = points[i];
+    var p2 = points[(i+1) % points.length];
+    var dist = haversine(p1, p2);
+    var midLat = (p1.lat + p2.lat) / 2;
+    var midLng = (p1.lng + p2.lng) / 2;
+    var label = '<div class="dist-label">' + dist.toFixed(1) + 'm</div>';
+    new kakao.maps.CustomOverlay({
+      position: new kakao.maps.LatLng(midLat, midLng),
+      content: label,
+      zIndex: 8, yAnchor: 1.6
+    }).setMap(map);
+  }
+
+  // 지도 fit
+  var bounds = new kakao.maps.LatLngBounds();
+  points.forEach(function(p){ bounds.extend(new kakao.maps.LatLng(p.lat, p.lng)); });
+  map.setBounds(bounds, 60);
+});
+</script>
+</body>
+</html>
