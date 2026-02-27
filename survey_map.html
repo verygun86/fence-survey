@@ -28,18 +28,15 @@
   #kakao-map { width: 100%; height: 100%; }
 
   .my-marker {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: #00d4aa; border: 3px solid white;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 900; color: #0a0f1a;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.35);
-    font-family: 'Noto Sans KR', sans-serif;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #ff3b3b; border: 2px solid white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
   .dist-label {
-    background: rgba(245,158,11,0.95);
-    border-radius: 5px; padding: 2px 7px;
-    font-size: 12px; font-weight: 700; color: #0a0f1a;
-    white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.7);
+    border-radius: 3px; padding: 1px 4px;
+    font-size: 10px; font-weight: 700; color: #ffe066;
+    white-space: nowrap;
     font-family: 'JetBrains Mono', monospace;
   }
 </style>
@@ -129,7 +126,7 @@ kakao.maps.load(function() {
   points.forEach(function(p) {
     var overlay = new kakao.maps.CustomOverlay({
       position: new kakao.maps.LatLng(p.lat, p.lng),
-      content: '<div class="my-marker">' + p.id + '</div>',
+      content: '<div class="my-marker"></div>',
       zIndex: 10, yAnchor: 0.5
     });
     overlay.setMap(map);
